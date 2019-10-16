@@ -1,0 +1,162 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "api.proto",
+        "version": ""
+    },
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "consumes": [
+        "application/json",
+        "multipart/form-data"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/account.service.Account/Info": {
+            "get": {
+                "summary": "/account.service.Account/Info",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.account.service.InfoReply"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "mid",
+                        "in": "query",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "account.service.Account"
+                ]
+            }
+        },
+        "/account.service.Account/Profile": {
+            "get": {
+                "summary": "/account.service.Account/Profile",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.account.service.ProfileReply"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "mid",
+                        "in": "query",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "account.service.Account"
+                ]
+            }
+        }
+    },
+    "definitions": {
+        ".account.service.Info": {
+            "type": "object",
+            "properties": {
+                "mid": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "sex": {
+                    "type": "string"
+                },
+                "face": {
+                    "type": "string"
+                }
+            }
+        },
+        ".account.service.InfoReply": {
+            "type": "object",
+            "properties": {
+                "info": {
+                    "$ref": "#/definitions/.account.service.Info"
+                }
+            }
+        },
+        ".account.service.MidReq": {
+            "type": "object",
+            "properties": {
+                "mid": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "mid"
+            ]
+        },
+        ".account.service.Profile": {
+            "type": "object",
+            "properties": {
+                "mid": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "sex": {
+                    "type": "string"
+                },
+                "face": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "join_time": {
+                    "type": "string"
+                }
+            }
+        },
+        ".account.service.ProfileReply": {
+            "type": "object",
+            "properties": {
+                "profile": {
+                    "$ref": "#/definitions/.account.service.Profile"
+                }
+            }
+        }
+    }
+}

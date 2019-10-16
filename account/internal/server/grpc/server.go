@@ -18,7 +18,7 @@ func New(svc *service.Service) *warden.Server {
 		}
 	}
 	ws := warden.NewServer(rc.Server)
-	pb.RegisterDemoServer(ws.Server(), svc)
+	pb.RegisterAccountServer(ws.Server(), svc)
 	ws, err := ws.Start()
 	if err != nil {
 		panic(err)

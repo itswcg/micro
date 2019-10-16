@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	pb "account/api"
-	"account/internal/model"
 	"account/internal/service"
 
 	"github.com/bilibili/kratos/pkg/conf/paladin"
@@ -42,7 +41,7 @@ func initRouter(e *bm.Engine) {
 	e.Ping(ping)
 	g := e.Group("/account")
 	{
-		g.GET("/start", howToStart)
+		g.GET("/info", howToStart)
 	}
 }
 
@@ -51,12 +50,4 @@ func ping(ctx *bm.Context) {
 		log.Error("ping error(%v)", err)
 		ctx.AbortWithStatus(http.StatusServiceUnavailable)
 	}
-}
-
-// example for http request handler.
-func howToStart(c *bm.Context) {
-	k := &model.Kratos{
-		Hello: "Golang 大法好 !!!",
-	}
-	c.JSON(k, nil)
 }

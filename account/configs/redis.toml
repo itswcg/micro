@@ -1,7 +1,7 @@
 
-demoExpire = "24h"
+redisExpire = "24h"
 
-[demo]
+[redis]
 	name = "account"
 	proto = "tcp"
 	addr = "127.0.0.1:6389"

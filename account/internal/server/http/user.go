@@ -57,12 +57,53 @@ func AddInfo(ctx *bm.Context) {
 		return
 	}
 
+	ctx.JSON(nil, ecode.OK)
 }
 
 func SetEmail(ctx *bm.Context) {
+	var (
+		err error
+		mid int64
+	)
+	params := ctx.Request.Form
+	midStr := params.Get("mid")
+	email := params.Get("email")
 
+	if mid, err = strconv.ParseInt(midStr, 10, 64); err != nil {
+		ctx.JSON(nil, ecode.RequestErr)
+		return
+	}
+	// check email
+
+	err = u.SetEmail(ctx, mid, email)
+	if err != nil {
+		ctx.JSON(nil, ecode.RequestErr)
+		return
+	}
+
+	ctx.JSON(nil, ecode.OK)
 }
 
 func SetPhone(ctx *bm.Context) {
+	var (
+		err error
+		mid int64
+	)
+	params := ctx.Request.Form
+	midStr := params.Get("mid")
+	phone := params.Get("phone")
 
+	if mid, err = strconv.ParseInt(midStr, 10, 64); err != nil {
+		ctx.JSON(nil, ecode.RequestErr)
+		return
+	}
+	// check phone
+
+	err = u.SetPhone(ctx, mid, phone)
+	if err != nil {
+		ctx.JSON(nil, ecode.RequestErr)
+		return
+	}
+
+	ctx.JSON(nil, ecode.OK)
 }

@@ -13,8 +13,9 @@ func (s *Service) GetInfo(ctx context.Context, mid int64) (info *api.Info, err e
 		err = ecode.RequestErr
 		return
 	}
-	if info, err := s.dao.GetInfo(ctx, mid); err != nil {
-		return info, err
+	if info, err = s.dao.GetInfo(ctx, mid); err != nil {
+		err = ecode.RequestErr
+		return
 	}
 	return
 }
@@ -25,15 +26,17 @@ func (s *Service) GetProfile(ctx context.Context, mid int64) (profile *api.Profi
 		err = ecode.RequestErr
 		return
 	}
-	if profile, err := s.dao.GetProfile(ctx, mid); err != nil {
-		return profile, err
+	if profile, err = s.dao.GetProfile(ctx, mid); err != nil {
+		err = ecode.RequestErr
+		return
 	}
 	return
 }
 
 func (s *Service) AddInfo(ctx context.Context, name, sex, face string) (err error) {
 	var mid int64
-	mid = 3
+	// Todo 获取mid
+	mid = 5
 	info := &model.Info{
 		Mid:  mid,
 		Name: name,
@@ -44,10 +47,12 @@ func (s *Service) AddInfo(ctx context.Context, name, sex, face string) (err erro
 	return
 }
 
-func (s *Service) SetEmail(ctx context.Context) {
-
+func (s *Service) SetEmail(ctx context.Context, mid int64, email string) (err error) {
+	err = s.dao.SetEmail(ctx, mid, email)
+	return
 }
 
-func (s *Service) SetPhone(ctx context.Context) {
-
+func (s *Service) SetPhone(ctx context.Context, mid int64, phone string) (err error) {
+	err = s.dao.SetPhone(ctx, mid, phone)
+	return
 }

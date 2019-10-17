@@ -55,7 +55,7 @@ func (d *dao) GetProfile(ctx context.Context, mid int64) (r *api.Profile, err er
 }
 
 func (d *dao) AddInfo(ctx context.Context, info *model.Info) (err error) {
-	_, err = d.db.Exec(ctx, fmt.Sprintf(_insertInfo, d.hit(info.Mid)), info.Name, info.Sex, info.Face)
+	_, err = d.db.Exec(ctx, fmt.Sprintf(_insertInfo, d.hit(info.Mid)), info.Mid, info.Name, info.Sex, info.Face, info.Name, info.Sex, info.Face)
 	if err != nil {
 		log.Error("db.Exec error(%v)", err)
 	}

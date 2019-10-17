@@ -1,6 +1,22 @@
 ### account
 统一用户中心
 
+#### 功能
+account服务提供以下功能:  
+
+http:
+
+* 注册
+* 登录
+* 修改资料
+* 获取用户资料
+* github授权登录
+
+rpc:
+
+* 查询用户资料
+
+
 ##### Mysql
 ```
 create database account
@@ -28,17 +44,3 @@ CREATE TABLE `user_1` (
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 ```
-
-#### 功能
-account服务提供以下功能:  
-
-http:
-
-* 注册
-* 登录
-* 修改资料
-* 获取用户资料
-
-rpc:
-
-* 查询用户资料

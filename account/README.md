@@ -5,7 +5,7 @@
 ```
 create database account
 
-CREATE TABLE `user_1` (
+CREATE TABLE `user_0` (
   `mid` int(11) NOT NULL,
   `name` varchar(32) NOT NULL,
   `sex` tinyint(4) NOT NULL DEFAULT 0,
@@ -16,7 +16,7 @@ CREATE TABLE `user_1` (
   PRIMARY KEY (`mid`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `user_2` (
+CREATE TABLE `user_1` (
   `mid` int(11) NOT NULL,
   `name` varchar(32) NOT NULL,
   `sex` tinyint(4) NOT NULL DEFAULT 0,

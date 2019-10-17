@@ -2,6 +2,7 @@ package dao
 
 import (
 	"account/api"
+	"account/internal/model"
 	"context"
 	"database/sql"
 	"fmt"
@@ -15,6 +16,10 @@ const (
 const (
 	_selInfoById    = "select mid,name,sex,face from user_%d where mid=?"
 	_selProfileById = "select mid,name,sex,face,email,phone,join_time from user_%d where mid=?"
+
+	_insertInfo  = "insert into user_%d(mid,name,sex,face) values (?,?,?,?) on duplicate key update name=?,sex=?,face=?"
+	_updateEmail = "update user_%d set email=? where mid=?"
+	_updatePhone = "update user_%d set phone=? where mid=?"
 )
 
 func (d *dao) hit(mid int64) int64 {
@@ -45,6 +50,30 @@ func (d *dao) GetProfile(ctx context.Context, mid int64) (r *api.Profile, err er
 		} else {
 			log.Error("row.Scan error(%v)", err)
 		}
+	}
+	return
+}
+
+func (d *dao) AddInfo(ctx context.Context, info *model.Info) (err error) {
+	_, err = d.db.Exec(ctx, fmt.Sprintf(_insertInfo, d.hit(info.Mid)), info.Name, info.Sex, info.Face)
+	if err != nil {
+		log.Error("db.Exec error(%v)", err)
+	}
+	return
+}
+
+func (d *dao) SetEmail(ctx context.Context, mid int64, email string) (err error) {
+	_, err = d.db.Exec(ctx, fmt.Sprintf(_updateEmail, d.hit(mid)), email, mid)
+	if err != nil {
+		log.Error("db.Exec error(%v)", err)
+	}
+	return
+}
+
+func (d *dao) SetPhone(ctx context.Context, mid int64, phone string) (err error) {
+	_, err = d.db.Exec(ctx, fmt.Sprintf(_updatePhone, d.hit(mid)), phone, mid)
+	if err != nil {
+		log.Error("db.Exec error(%v)", err)
 	}
 	return
 }

@@ -3,7 +3,6 @@ package http
 import (
 	"net/http"
 
-	pb "account/api"
 	"account/internal/service"
 
 	"github.com/bilibili/kratos/pkg/conf/paladin"
@@ -12,7 +11,7 @@ import (
 )
 
 var (
-	svc *service.Service
+	u *service.Service
 )
 
 // New new a bm server.
@@ -27,9 +26,9 @@ func New(s *service.Service) (engine *bm.Engine) {
 			panic(err)
 		}
 	}
-	svc = s
+	u = s
 	engine = bm.DefaultServer(hc.Server)
-	pb.RegisterDemoBMServer(engine, svc)
+	//pb.RegisterAccountBMServer(engine, u)
 	initRouter(engine)
 	if err := engine.Start(); err != nil {
 		panic(err)
@@ -41,12 +40,16 @@ func initRouter(e *bm.Engine) {
 	e.Ping(ping)
 	g := e.Group("/account")
 	{
-		g.GET("/info", howToStart)
+		g.GET("/info", Info)
+		g.GET("/profile", Profile)
+		g.POST("/add", AddInfo)
+		g.POST("/email/update", SetEmail)
+		g.POST("/phone/update", SetPhone)
 	}
 }
 
 func ping(ctx *bm.Context) {
-	if err := svc.Ping(ctx); err != nil {
+	if err := u.Ping(ctx); err != nil {
 		log.Error("ping error(%v)", err)
 		ctx.AbortWithStatus(http.StatusServiceUnavailable)
 	}

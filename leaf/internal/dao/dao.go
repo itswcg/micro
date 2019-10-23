@@ -4,12 +4,16 @@ import (
 	"context"
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 	"github.com/bilibili/kratos/pkg/database/sql"
+	"leaf/internal/model"
 )
 
 // Dao dao interface
 type Dao interface {
 	Close()
 	Ping(ctx context.Context) (err error)
+	All(c context.Context) (seq map[string]*model.Segment, err error)
+	MaxSeq(c context.Context, bizTag string) (maxSeq int64, err error)
+	UpMaxSeq(c context.Context, bizTag string, maxSeq, lastSeq int64) (rows int64, err error)
 }
 
 // dao dao.

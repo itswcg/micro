@@ -2,19 +2,19 @@ package service
 
 import (
 	"context"
-	"fmt"
-
 	"github.com/bilibili/kratos/pkg/conf/paladin"
-	pb "leaf/api"
+	"leaf/api"
 	"leaf/internal/dao"
-
-	"github.com/golang/protobuf/ptypes/empty"
+	"leaf/internal/model"
+	"sync"
 )
 
 // Service service.
 type Service struct {
-	ac  *paladin.Map
-	dao dao.Dao
+	ac   *paladin.Map
+	dao  dao.Dao
+	seqs map[string]*model.Segment
+	bl   sync.RWMutex
 }
 
 // New new a service and return.
@@ -30,22 +30,6 @@ func New() (s *Service) {
 	return s
 }
 
-// SayHello grpc demo func.
-func (s *Service) SayHello(ctx context.Context, req *pb.HelloReq) (reply *empty.Empty, err error) {
-	reply = new(empty.Empty)
-	fmt.Printf("hello %s", req.Name)
-	return
-}
-
-// SayHelloURL bm demo func.
-func (s *Service) SayHelloURL(ctx context.Context, req *pb.HelloReq) (reply *pb.HelloResp, err error) {
-	reply = &pb.HelloResp{
-		Content: "hello " + req.Name,
-	}
-	fmt.Printf("hello url %s", req.Name)
-	return
-}
-
 // Ping ping the resource.
 func (s *Service) Ping(ctx context.Context) (err error) {
 	return s.dao.Ping(ctx)
@@ -54,4 +38,27 @@ func (s *Service) Ping(ctx context.Context) (err error) {
 // Close close the resource.
 func (s *Service) Close() {
 	s.dao.Close()
+}
+
+// load seq from mysql
+func (s *Service) loadSeqs() (err error) {
+	var seqs map[string]*model.Segment
+	if seqs, err = s.dao.All(context.TODO()); err != nil {
+		return
+	}
+	for tag, seq := range seqs {
+		s.bl.Lock()
+		if _, ok := s.seqs[tag]; !ok {
+			s.seqs[tag] = seq
+			s.bl.Unlock()
+			continue
+		}
+		s.bl.Unlock()
+	}
+	return
+}
+
+// next id
+func (s *Service) NextID(ctx context.Context, req *api.LeafReq) (res *api.LeafReply, err error) {
+	//
 }

@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	pb "leaf/api"
-	"leaf/internal/model"
 	"leaf/internal/service"
 
 	"github.com/bilibili/kratos/pkg/conf/paladin"
@@ -30,7 +29,7 @@ func New(s *service.Service) (engine *bm.Engine) {
 	}
 	svc = s
 	engine = bm.DefaultServer(hc.Server)
-	pb.RegisterDemoBMServer(engine, svc)
+	pb.RegisterLeafBMServer(engine, svc)
 	initRouter(engine)
 	if err := engine.Start(); err != nil {
 		panic(err)
@@ -40,10 +39,6 @@ func New(s *service.Service) (engine *bm.Engine) {
 
 func initRouter(e *bm.Engine) {
 	e.Ping(ping)
-	g := e.Group("/leaf")
-	{
-		g.GET("/start", howToStart)
-	}
 }
 
 func ping(ctx *bm.Context) {
@@ -51,12 +46,4 @@ func ping(ctx *bm.Context) {
 		log.Error("ping error(%v)", err)
 		ctx.AbortWithStatus(http.StatusServiceUnavailable)
 	}
-}
-
-// example for http request handler.
-func howToStart(c *bm.Context) {
-	k := &model.Kratos{
-		Hello: "Golang 大法好 !!!",
-	}
-	c.JSON(k, nil)
 }

@@ -10,7 +10,9 @@ CREATE TABLE `segment` (
   `max_id` bigint(20) NOT NULL DEFAULT 1,
   `step` int(11) NOT NULL,
   `desc` varchar(256),
-  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`biz_tag`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+insert into segment(biz_tag, max_id, step, `desc`) values('account', 10000, 10, 'account.service')
 ```

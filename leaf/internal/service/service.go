@@ -2,19 +2,25 @@ package service
 
 import (
 	"context"
+	"fmt"
 	"github.com/bilibili/kratos/pkg/conf/paladin"
+	"github.com/bilibili/kratos/pkg/ecode"
 	"leaf/api"
 	"leaf/internal/dao"
 	"leaf/internal/model"
 	"sync"
+	"time"
 )
+
+const _nextStepRetry = 3
 
 // Service service.
 type Service struct {
-	ac   *paladin.Map
-	dao  dao.Dao
-	seqs map[string]*model.Segment
-	bl   sync.RWMutex
+	ac            *paladin.Map
+	dao           dao.Dao
+	seqs          map[string]*model.Segment
+	bl            sync.RWMutex // 读写锁
+	lastTimestamp time.Time
 }
 
 // New new a service and return.
@@ -24,9 +30,13 @@ func New() (s *Service) {
 		panic(err)
 	}
 	s = &Service{
-		ac:  ac,
-		dao: dao.New(),
+		ac:            ac,
+		dao:           dao.New(),
+		seqs:          make(map[string]*model.Segment),
+		lastTimestamp: time.Now(),
 	}
+	s.loadSeqs()
+	go s.loadProc()
 	return s
 }
 
@@ -58,7 +68,60 @@ func (s *Service) loadSeqs() (err error) {
 	return
 }
 
+func (s *Service) loadProc() {
+	for {
+		time.Sleep(time.Duration(5))
+		s.loadSeqs()
+	}
+}
+
 // next id
 func (s *Service) NextID(ctx context.Context, req *api.LeafReq) (res *api.LeafReply, err error) {
-	//
+	s.bl.RLock()
+	seq, ok := s.seqs[req.BizTag]
+	s.bl.RUnlock()
+	if !ok {
+		err = ecode.NothingFound
+		return
+	}
+	seq.Mutex.Lock()
+	if seq.CurSeq == 0 || seq.CurSeq+1 > seq.MaxSeq {
+		if err = s.nextStep(ctx, seq); err != nil {
+			seq.Mutex.Unlock()
+			return
+		}
+	}
+	seq.CurSeq++
+	id := int64(seq.CurSeq)
+	seq.Mutex.Unlock()
+
+	return &api.LeafReply{Id: id}, nil
+}
+
+func (s *Service) nextStep(ctx context.Context, seq *model.Segment) (err error) {
+	var (
+		n             int
+		lastSeq, rows int64
+	)
+	for {
+		if lastSeq, err = s.dao.MaxSeq(ctx, seq.BizTag); err != nil {
+			return
+		}
+
+		if rows, err = s.dao.UpMaxSeq(ctx, seq.BizTag, lastSeq+seq.Step, lastSeq); err != nil {
+			return
+		}
+
+		if rows > 0 {
+			seq.CurSeq = lastSeq
+			seq.MaxSeq = lastSeq + seq.Step
+			break
+		}
+
+		if n++; n > _nextStepRetry {
+			err = fmt.Errorf("get the next step failed(%s)", seq.BizTag)
+			return
+		}
+	}
+
 }

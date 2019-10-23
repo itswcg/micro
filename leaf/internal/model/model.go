@@ -13,5 +13,5 @@ type Segment struct {
 	Desc          string
 	UpdateTime    time.Time
 	LastTimestamp time.Time
-	Mutex         sync.Mutex
+	Mutex         sync.Mutex // 互斥锁
 }

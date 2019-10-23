@@ -19,13 +19,13 @@ var PathLeafNextID = "/leaf/next-id"
 
 // LeafBMServer is the server API for Leaf service.
 type LeafBMServer interface {
-	NextID(ctx context.Context, req *leafReq) (resp *leafReply, err error)
+	NextID(ctx context.Context, req *LeafReq) (resp *LeafReply, err error)
 }
 
 var LeafSvc LeafBMServer
 
 func leafNextID(c *bm.Context) {
-	p := new(leafReq)
+	p := new(LeafReq)
 	if err := c.BindWith(p, binding.Default(c.Request.Method, c.Request.Header.Get("Content-Type"))); err != nil {
 		return
 	}

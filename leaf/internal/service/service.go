@@ -36,7 +36,7 @@ func New() (s *Service) {
 		lastTimestamp: time.Now(),
 	}
 	s.loadSeqs()
-	go s.loadProc()
+	//go s.loadProc()
 	return s
 }
 
@@ -123,5 +123,5 @@ func (s *Service) nextStep(ctx context.Context, seq *model.Segment) (err error) 
 			return
 		}
 	}
-
+	return
 }

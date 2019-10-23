@@ -9,16 +9,16 @@ import (
 )
 
 const (
-	_all       = "select big_tag,max_id,step,desc,update_time from segment"
-	_maxSeq    = "select max_id from segment where big_tag=?"
-	_updateMax = "update segment set max_id=? where big_tag=? and max_id=?"
+	_all       = "select biz_tag,max_id,step,`desc`,update_time from segment"
+	_maxSeq    = "select max_id from segment where biz_tag=?"
+	_updateMax = "update segment set max_id=? where biz_tag=? and max_id=?"
 )
 
 // All get all seq
 func (d *dao) All(c context.Context) (seqs map[string]*model.Segment, err error) {
 	rows, err := d.db.Query(c, _all)
 	if err != nil {
-		log.Error("d.db.Query(%s) error(%v)", _allSQL, err)
+		log.Error("d.db.Query(%s) error(%v)", _all, err)
 		return
 	}
 	seqs = make(map[string]*model.Segment)

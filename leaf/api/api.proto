@@ -9,16 +9,16 @@ package leaf.service;
 option go_package = "api";
 option (gogoproto.goproto_getters_all) = false;
 
-message leafReq {
+message LeafReq {
     string biz_tag = 1;
 }
 
-message leafReply {
+message LeafReply {
     int64 id = 1;
 }
 
 service Leaf {
-    rpc NextID (leafReq) returns (leafReply) {
+    rpc NextID (LeafReq) returns (LeafReply) {
         option (google.api.http) = {
             get: "/leaf/next-id"
         };

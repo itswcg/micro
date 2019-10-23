@@ -32,7 +32,7 @@
                                     "type": "string"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/.leaf.service.leafReply"
+                                    "$ref": "#/definitions/.leaf.service.LeafReply"
                                 }
                             }
                         }
@@ -53,7 +53,7 @@
         }
     },
     "definitions": {
-        ".leaf.service.leafReply": {
+        ".leaf.service.LeafReply": {
             "type": "object",
             "properties": {
                 "id": {
@@ -61,7 +61,7 @@
                 }
             }
         },
-        ".leaf.service.leafReq": {
+        ".leaf.service.LeafReq": {
             "type": "object",
             "properties": {
                 "biz_tag": {

@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "google/api/annotations.proto";
 
 
 package leaf.service;
@@ -8,4 +9,18 @@ package leaf.service;
 option go_package = "api";
 option (gogoproto.goproto_getters_all) = false;
 
-message
+message leafReq {
+    string biz_tag = 1;
+}
+
+message leafReply {
+    int64 id = 1;
+}
+
+service Leaf {
+    rpc NextID (leafReq) returns (leafReply) {
+        option (google.api.http) = {
+            get: "/leaf/next-id"
+        };
+    };
+}

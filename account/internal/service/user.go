@@ -1,10 +1,10 @@
 package service
 
 import (
-	"github.com/itswcg/micro/account/api"
-	"github.com/itswcg/micro/account/internal/model"
 	"context"
 	"github.com/bilibili/kratos/pkg/ecode"
+	"github.com/itswcg/micro/account/api"
+	"github.com/itswcg/micro/account/internal/model"
 )
 
 func (s *Service) GetInfo(ctx context.Context, mid int64) (info *api.Info, err error) {
@@ -33,10 +33,12 @@ func (s *Service) GetProfile(ctx context.Context, mid int64) (profile *api.Profi
 	return
 }
 
-func (s *Service) AddInfo(ctx context.Context, name, sex, face string) (err error) {
-	var mid int64
-	// Todo 获取mid
-	mid = 5
+func (s *Service) AddInfo(ctx context.Context, name, sex, face string) (mid int64, err error) {
+	mid, err = s.NextID(ctx)
+	if err != nil {
+		return
+	}
+
 	info := &model.Info{
 		Mid:  mid,
 		Name: name,

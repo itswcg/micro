@@ -51,13 +51,13 @@ func AddInfo(ctx *bm.Context) {
 	// check name
 	// check face
 
-	err = u.AddInfo(ctx, name, sex, face)
+	mid, err := u.AddInfo(ctx, name, sex, face)
 	if err != nil {
 		ctx.JSON(nil, ecode.RequestErr)
 		return
 	}
 
-	ctx.JSON(nil, ecode.OK)
+	ctx.JSON(u.GetProfile(ctx, mid))
 }
 
 func SetEmail(ctx *bm.Context) {

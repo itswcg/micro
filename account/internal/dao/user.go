@@ -1,11 +1,11 @@
 package dao
 
 import (
-	"account/api"
-	"account/internal/model"
 	"context"
 	"database/sql"
 	"fmt"
+	"github.com/itswcg/micro/account/api"
+	"github.com/itswcg/micro/account/internal/model"
 	"github.com/prometheus/common/log"
 )
 

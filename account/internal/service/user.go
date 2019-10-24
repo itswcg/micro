@@ -1,8 +1,8 @@
 package service
 
 import (
-	"account/api"
-	"account/internal/model"
+	"github.com/itswcg/micro/account/api"
+	"github.com/itswcg/micro/account/internal/model"
 	"context"
 	"github.com/bilibili/kratos/pkg/ecode"
 )

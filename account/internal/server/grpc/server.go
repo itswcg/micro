@@ -1,8 +1,8 @@
 package grpc
 
 import (
-	pb "account/api"
-	"account/internal/service"
+	pb "github.com/itswcg/micro/account/api"
+	"github.com/itswcg/micro/account/internal/service"
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 	"github.com/bilibili/kratos/pkg/net/rpc/warden"
 )

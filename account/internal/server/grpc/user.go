@@ -1,7 +1,7 @@
 package grpc
 
 import (
-	"account/api"
+	"github.com/itswcg/micro/account/api"
 	"context"
 )
 

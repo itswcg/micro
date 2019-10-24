@@ -1,4 +1,4 @@
-module account
+module github.com/itswcg/micro/account
 
 go 1.12
 

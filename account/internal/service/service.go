@@ -1,15 +1,17 @@
 package service
 
 import (
-	"account/internal/dao"
 	"context"
 	"github.com/bilibili/kratos/pkg/conf/paladin"
+	"github.com/itswcg/micro/account/internal/dao"
+	leafrpc "github.com/itswcg/micro/leaf/api"
 )
 
 // Service service.
 type Service struct {
-	ac  *paladin.Map
-	dao dao.Dao
+	ac         *paladin.Map
+	dao        dao.Dao
+	leafClient leafrpc.LeafClient
 }
 
 // New new a service and return.

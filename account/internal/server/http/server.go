@@ -3,7 +3,7 @@ package http
 import (
 	"net/http"
 
-	"account/internal/service"
+	"github.com/itswcg/micro/account/internal/service"
 
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 	"github.com/bilibili/kratos/pkg/log"

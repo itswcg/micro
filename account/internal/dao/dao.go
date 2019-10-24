@@ -1,9 +1,9 @@
 package dao
 
 import (
-	"account/api"
-	"account/internal/model"
 	"context"
+	"github.com/itswcg/micro/account/api"
+	"github.com/itswcg/micro/account/internal/model"
 	"time"
 
 	"github.com/bilibili/kratos/pkg/cache/redis"

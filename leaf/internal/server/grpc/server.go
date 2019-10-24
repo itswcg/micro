@@ -3,8 +3,8 @@ package grpc
 import (
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 	"github.com/bilibili/kratos/pkg/net/rpc/warden"
-	pb "leaf/api"
-	"leaf/internal/service"
+	pb "github.com/itswcg/micro/leaf/api"
+	"github.com/itswcg/micro/leaf/internal/service"
 )
 
 // New new a grpc server.

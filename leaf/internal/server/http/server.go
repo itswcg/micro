@@ -3,8 +3,8 @@ package http
 import (
 	"net/http"
 
-	pb "leaf/api"
-	"leaf/internal/service"
+	pb "github.com/itswcg/micro/leaf/api"
+	"github.com/itswcg/micro/leaf/internal/service"
 
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 	"github.com/bilibili/kratos/pkg/log"

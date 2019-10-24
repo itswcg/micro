@@ -1,4 +1,4 @@
-module leaf
+module github.com/itswcg/micro/leaf
 
 go 1.12
 

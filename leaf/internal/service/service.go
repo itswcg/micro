@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 	"github.com/bilibili/kratos/pkg/ecode"
-	"leaf/api"
-	"leaf/internal/dao"
-	"leaf/internal/model"
+	"github.com/itswcg/micro/leaf/api"
+	"github.com/itswcg/micro/leaf/internal/dao"
+	"github.com/itswcg/micro/leaf/internal/model"
 	"sync"
 	"time"
 )

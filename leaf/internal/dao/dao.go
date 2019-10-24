@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 	"github.com/bilibili/kratos/pkg/database/sql"
-	"leaf/internal/model"
+	"github.com/itswcg/micro/leaf/internal/model"
 )
 
 // Dao dao interface

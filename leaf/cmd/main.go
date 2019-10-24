@@ -10,9 +10,9 @@ import (
 
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 	"github.com/bilibili/kratos/pkg/log"
-	"leaf/internal/server/grpc"
-	"leaf/internal/server/http"
-	"leaf/internal/service"
+	"github.com/itswcg/micro/leaf/internal/server/grpc"
+	"github.com/itswcg/micro/leaf/internal/server/http"
+	"github.com/itswcg/micro/leaf/internal/service"
 )
 
 func main() {

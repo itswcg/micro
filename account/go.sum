@@ -94,6 +94,8 @@ github.com/hpcloud/tail v1.0.0/go.mod h1:ab1qPbhIpdTxEkNHXyeSf5vhxWSCs/tWer42PpO
 github.com/inconshreveable/mousetrap v1.0.0/go.mod h1:PxqpIevigyE2G7u3NXJIT2ANytuPF1OarO4DADm73n8=
 github.com/influxdata/influxdb1-client v0.0.0-20190809212627-fc22c7df067e/go.mod h1:qj24IKcXYK6Iy9ceXlo3Tc+vtHo9lIhSX5JddghvEPo=
 github.com/itswcg/micro v0.0.0-20191023120729-6cf402981489 h1:1Xjnr+Cf1siZnZT+lRe90Bts5BnG/s0uRwLGzRHbae0=
+github.com/itswcg/micro/leaf v0.0.0-20191024021900-e6f70640f574 h1:ABQeVOpEw1ooKGS4d9TQJ7Ne+sicZLnDIm7svOIWRLI=
+github.com/itswcg/micro/leaf v0.0.0-20191024021900-e6f70640f574/go.mod h1:w2126d3d3ynreVfhMRyYce8YFPr4Kl4sWpunNuIxtVE=
 github.com/jcmturner/gofork v0.0.0-20190328161633-dc7c13fece03/go.mod h1:MK8+TM0La+2rjBD4jE12Kj1pCCxK7d2LK/UM3ncEo0o=
 github.com/jonboulle/clockwork v0.1.0/go.mod h1:Ii8DK3G1RaLaWxj9trq07+26W01tbo22gdxWY5EU2bo=
 github.com/json-iterator/go v1.1.6/go.mod h1:+SdeFBvtyEkXs7REEP0seUULqWtbJapLOCVDaaPEHmU=

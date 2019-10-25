@@ -18,18 +18,19 @@ type Service struct {
 
 // New new a service and return.
 func New() (s *Service) {
-	var ac = new(paladin.TOML)
+	type Gc struct {
+		LeafClient *warden.ClientConfig
+	}
 	var (
-		gc struct {
-			LeafClient *warden.ClientConfig
-		}
+		ac = new(paladin.TOML)
+		gc = new(Gc) // new 返回指针, slice,map,chan使用make
 	)
 
 	if err := paladin.Watch("application.toml", ac); err != nil {
 		panic(err)
 	}
 
-	if err := paladin.Get("grpc.toml").UnmarshalTOML(&gc); err != nil {
+	if err := paladin.Get("grpc.toml").UnmarshalTOML(gc); err != nil {
 		panic(err)
 	}
 

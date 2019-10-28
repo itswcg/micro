@@ -85,41 +85,6 @@
                     "account.service.Account"
                 ]
             }
-        },
-        "/account.service.Account/Token": {
-            "get": {
-                "summary": "/account.service.Account/Token",
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "code": {
-                                    "type": "integer"
-                                },
-                                "message": {
-                                    "type": "string"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/.account.service.TokenReply"
-                                }
-                            }
-                        }
-                    }
-                },
-                "parameters": [
-                    {
-                        "name": "token",
-                        "in": "query",
-                        "required": false,
-                        "type": "string"
-                    }
-                ],
-                "tags": [
-                    "account.service.Account"
-                ]
-            }
         }
     },
     "definitions": {
@@ -190,22 +155,6 @@
             "properties": {
                 "profile": {
                     "$ref": "#/definitions/.account.service.Profile"
-                }
-            }
-        },
-        ".account.service.TokenReply": {
-            "type": "object",
-            "properties": {
-                "mid": {
-                    "type": "integer"
-                }
-            }
-        },
-        ".account.service.TokenReq": {
-            "type": "object",
-            "properties": {
-                "token": {
-                    "type": "string"
                 }
             }
         }

@@ -22,8 +22,6 @@ type Dao interface {
 	AddInfo(ctx context.Context, info *model.Info) (err error)
 	SetEmail(ctx context.Context, mid int64, email string) (err error)
 	SetPhone(ctx context.Context, mid int64, phone string) (err error)
-	SetToken(ctx context.Context, token string, mid int64) (err error)
-	GetMidByToken(ctx context.Context, token string) (mid int64, err error)
 }
 
 // dao dao.

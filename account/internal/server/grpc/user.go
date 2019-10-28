@@ -1,8 +1,8 @@
 package grpc
 
 import (
-	"github.com/itswcg/micro/account/api"
 	"context"
+	"github.com/itswcg/micro/account/api"
 )
 
 func (s *UserServer) Info(ctx context.Context, req *api.MidReq) (res *api.InfoReply, err error) {
@@ -19,4 +19,13 @@ func (s *UserServer) Profile(ctx context.Context, req *api.MidReq) (res *api.Pro
 		return nil, err
 	}
 	return &api.ProfileReply{Profile: profile}, nil
+}
+
+func (s *UserServer) Token(ctx context.Context, req *api.TokenReq) (res *api.TokenReply, err error) {
+	mid, err := s.u.Token(ctx, req.Token)
+	if err != nil {
+		return nil, err
+	}
+
+	return &api.TokenReply{Mid: mid}, nil
 }

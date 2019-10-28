@@ -2,9 +2,11 @@
 redisExpire = "24h"
 
 [redis]
-	name = "account"
+	name = "account.token"
 	proto = "tcp"
-	addr = "127.0.0.1:6389"
+	addr = "212.64.50.167:2224"
+	db = 2
+	auth = "itswcg"
 	idle = 10
 	active = 10
 	dialTimeout = "1s"

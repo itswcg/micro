@@ -40,11 +40,13 @@ func initRouter(e *bm.Engine) {
 	e.Ping(ping)
 	g := e.Group("/account")
 	{
+		g.POST("sign_up", AddInfo)
+		g.POST("sign_in")
 		g.GET("/info", Info)
 		g.GET("/profile", Profile)
-		g.POST("/add", AddInfo)
 		g.POST("/email/update", SetEmail)
 		g.POST("/phone/update", SetPhone)
+
 	}
 }
 

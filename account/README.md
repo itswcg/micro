@@ -27,6 +27,7 @@ create database account
 CREATE TABLE `user_0` (
   `mid` int(11) NOT NULL,
   `name` varchar(32) NOT NULL,
+  `password` varchar(32) NOT NULL,
   `sex` tinyint(4) NOT NULL DEFAULT 0,
   `face` varchar(512) NOT NULL DEFAULT '',
   `email` varchar(128) NOT NULL DEFAULT '',
@@ -35,3 +36,9 @@ CREATE TABLE `user_0` (
   PRIMARY KEY (`mid`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 ```
+
+#### Todo
+
+* 认证选型(基于cookie,session?基于token?基于jwt?)
+* migrate工具
+* token 认证, rpc认证?

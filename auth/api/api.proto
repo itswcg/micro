@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+
+package auth.service;
+
+option go_package = "api";
+option (gogoproto.goproto_getters_all) = false;
+
+message TokenReq {
+    string token = 1;
+}
+
+message TokenReply {
+    int64 mid = 1;
+}
+
+service Account {
+    rpc Token (TokenReq) returns (TokenReply);
+}

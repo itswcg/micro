@@ -1,0 +1,11 @@
+
+[mysql]
+	addr = "212.64.50.167:2223"
+	dsn = "wcg:itswcg@tcp(212.64.50.167:2223)/account?timeout=1s&readTimeout=1s&writeTimeout=1s&parseTime=true&loc=Local&charset=utf8mb4,utf8"
+	readDSN = ["wcg:itswcg@tcp(212.64.50.167:2223)/account?timeout=1s&readTimeout=1s&writeTimeout=1s&parseTime=true&loc=Local&charset=utf8mb4,utf8"]
+	active = 20
+	idle = 10
+	idleTimeout ="4h"
+	queryTimeout = "200ms"
+	execTimeout = "300ms"
+	tranTimeout = "400ms"

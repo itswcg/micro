@@ -17,12 +17,15 @@ var _ binding.StructValidator
 
 var PathAccountInfo = "/account.service.Account/Info"
 var PathAccountProfile = "/account.service.Account/Profile"
+var PathAccountToken = "/account.service.Account/Token"
 
 // AccountBMServer is the server API for Account service.
 type AccountBMServer interface {
 	Info(ctx context.Context, req *MidReq) (resp *InfoReply, err error)
 
 	Profile(ctx context.Context, req *MidReq) (resp *ProfileReply, err error)
+
+	Token(ctx context.Context, req *TokenReq) (resp *TokenReply, err error)
 }
 
 var AccountSvc AccountBMServer
@@ -45,9 +48,19 @@ func accountProfile(c *bm.Context) {
 	c.JSON(resp, err)
 }
 
+func accountToken(c *bm.Context) {
+	p := new(TokenReq)
+	if err := c.BindWith(p, binding.Default(c.Request.Method, c.Request.Header.Get("Content-Type"))); err != nil {
+		return
+	}
+	resp, err := AccountSvc.Token(c, p)
+	c.JSON(resp, err)
+}
+
 // RegisterAccountBMServer Register the blademaster route
 func RegisterAccountBMServer(e *bm.Engine, server AccountBMServer) {
 	AccountSvc = server
 	e.GET("/account.service.Account/Info", accountInfo)
 	e.GET("/account.service.Account/Profile", accountProfile)
+	e.GET("/account.service.Account/Token", accountToken)
 }

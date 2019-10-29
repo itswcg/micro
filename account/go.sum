@@ -21,6 +21,8 @@ github.com/beorn7/perks v1.0.1/go.mod h1:G2ZrVWU2WbWT9wwq4/hrbKbnv/1ERSJQ0ibhJ6r
 github.com/bgentry/speakeasy v0.1.0/go.mod h1:+zsyZBPWlz7T6j88CTgSN5bM796AkVf0kBD4zp0CCIs=
 github.com/bilibili/kratos v0.2.4-0.20191015155007-2220ca1e5395 h1:BNZMwz8VPj5fRsSKrVzBfeLZmHlkHNM1MSNml+VrbE0=
 github.com/bilibili/kratos v0.2.4-0.20191015155007-2220ca1e5395/go.mod h1:nVeUS1fXgDJEV/aoZg+SVFAv5Lm9e4iro3C2gBN3g0o=
+github.com/bilibili/kratos v0.2.4-0.20191025092737-e14170de04ba h1:fbBLCh5nucIZ1sa7tMbRTdFtbS35P5dMeMU0Rhc7ukA=
+github.com/bilibili/kratos v0.2.4-0.20191025092737-e14170de04ba/go.mod h1:Z2fLXL7KGJs+EjJGiQl5fk54YJCpRevb6uw5sbJtiX0=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
 github.com/cockroachdb/datadriven v0.0.0-20190809214429-80d97fb3cbaa/go.mod h1:zn76sxSg3SzpJ0PPJaLDCu+Bu0Lg3sKTORVIj19EIF8=
 github.com/coreos/go-semver v0.2.0/go.mod h1:nnelYz7RCh+5ahJtPPxZlU+153eP4D4r3EedlOD2RNk=
@@ -94,6 +96,9 @@ github.com/hpcloud/tail v1.0.0/go.mod h1:ab1qPbhIpdTxEkNHXyeSf5vhxWSCs/tWer42PpO
 github.com/inconshreveable/mousetrap v1.0.0/go.mod h1:PxqpIevigyE2G7u3NXJIT2ANytuPF1OarO4DADm73n8=
 github.com/influxdata/influxdb1-client v0.0.0-20190809212627-fc22c7df067e/go.mod h1:qj24IKcXYK6Iy9ceXlo3Tc+vtHo9lIhSX5JddghvEPo=
 github.com/itswcg/micro v0.0.0-20191023120729-6cf402981489 h1:1Xjnr+Cf1siZnZT+lRe90Bts5BnG/s0uRwLGzRHbae0=
+github.com/itswcg/micro v0.0.0-20191028125924-b96ab3375876 h1:j/3GbV6yY8CdKSJDs6Ix91g7K3UzmMvs8+MNTylJgLE=
+github.com/itswcg/micro/auth v0.0.0-20191028125924-b96ab3375876 h1:cEoZ/UHPm9BoZvZqW3VJkhMCJs+UKlXHSFlLu0ak/II=
+github.com/itswcg/micro/auth v0.0.0-20191028125924-b96ab3375876/go.mod h1:HOy+RzvAg0YOO0JNebB8ZxkcakKgWlIstlAcfkXJIBQ=
 github.com/itswcg/micro/leaf v0.0.0-20191024021900-e6f70640f574 h1:ABQeVOpEw1ooKGS4d9TQJ7Ne+sicZLnDIm7svOIWRLI=
 github.com/itswcg/micro/leaf v0.0.0-20191024021900-e6f70640f574/go.mod h1:w2126d3d3ynreVfhMRyYce8YFPr4Kl4sWpunNuIxtVE=
 github.com/jcmturner/gofork v0.0.0-20190328161633-dc7c13fece03/go.mod h1:MK8+TM0La+2rjBD4jE12Kj1pCCxK7d2LK/UM3ncEo0o=

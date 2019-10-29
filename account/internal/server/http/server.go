@@ -1,6 +1,8 @@
 package http
 
 import (
+	"github.com/bilibili/kratos/pkg/net/rpc/warden"
+	"github.com/itswcg/micro/middleware/auth"
 	"net/http"
 
 	"github.com/itswcg/micro/account/internal/service"
@@ -11,14 +13,16 @@ import (
 )
 
 var (
-	u *service.Service
+	u     *service.Service
+	authn *auth.Auth
 )
 
 // New new a bm server.
 func New(s *service.Service) (engine *bm.Engine) {
 	var (
 		hc struct {
-			Server *bm.ServerConfig
+			Server     *bm.ServerConfig
+			AuthClient *warden.ClientConfig
 		}
 	)
 	if err := paladin.Get("http.toml").UnmarshalTOML(&hc); err != nil {
@@ -29,6 +33,10 @@ func New(s *service.Service) (engine *bm.Engine) {
 	u = s
 	engine = bm.DefaultServer(hc.Server)
 	//pb.RegisterAccountBMServer(engine, u)
+
+	// 引入auth中间件
+	authn = auth.New(&auth.Config{AuthClient: hc.AuthClient})
+
 	initRouter(engine)
 	if err := engine.Start(); err != nil {
 		panic(err)
@@ -40,12 +48,12 @@ func initRouter(e *bm.Engine) {
 	e.Ping(ping)
 	g := e.Group("/account")
 	{
-		g.POST("sign_up", AddInfo)
-		g.POST("sign_in")
-		g.GET("/info", Info)
-		g.GET("/profile", Profile)
-		g.POST("/email/update", SetEmail)
-		g.POST("/phone/update", SetPhone)
+		g.POST("sign_up", authn.AllowAny, AddInfo)
+		g.POST("sign_in", authn.AllowAny)
+		g.GET("/info", Info, authn.IsAuthenticated)
+		g.GET("/profile", Profile, authn.IsAuthenticated)
+		g.POST("/email/update", authn.IsAuthenticated, SetEmail)
+		g.POST("/phone/update", authn.IsAuthenticated, SetPhone)
 
 	}
 }

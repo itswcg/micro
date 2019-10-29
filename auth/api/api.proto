@@ -16,6 +16,6 @@ message TokenReply {
     int64 mid = 1;
 }
 
-service Account {
+service Auth {
     rpc Token (TokenReq) returns (TokenReply);
 }

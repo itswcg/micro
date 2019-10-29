@@ -15,26 +15,26 @@ var _ *bm.Context
 var _ context.Context
 var _ binding.StructValidator
 
-var PathAccountToken = "/auth.service.Account/Token"
+var PathAuthToken = "/auth.service.Auth/Token"
 
-// AccountBMServer is the server API for Account service.
-type AccountBMServer interface {
+// AuthBMServer is the server API for Auth service.
+type AuthBMServer interface {
 	Token(ctx context.Context, req *TokenReq) (resp *TokenReply, err error)
 }
 
-var AccountSvc AccountBMServer
+var AuthSvc AuthBMServer
 
-func accountToken(c *bm.Context) {
+func authToken(c *bm.Context) {
 	p := new(TokenReq)
 	if err := c.BindWith(p, binding.Default(c.Request.Method, c.Request.Header.Get("Content-Type"))); err != nil {
 		return
 	}
-	resp, err := AccountSvc.Token(c, p)
+	resp, err := AuthSvc.Token(c, p)
 	c.JSON(resp, err)
 }
 
-// RegisterAccountBMServer Register the blademaster route
-func RegisterAccountBMServer(e *bm.Engine, server AccountBMServer) {
-	AccountSvc = server
-	e.GET("/auth.service.Account/Token", accountToken)
+// RegisterAuthBMServer Register the blademaster route
+func RegisterAuthBMServer(e *bm.Engine, server AuthBMServer) {
+	AuthSvc = server
+	e.GET("/auth.service.Auth/Token", authToken)
 }

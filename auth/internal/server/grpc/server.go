@@ -7,7 +7,7 @@ import (
 	"github.com/itswcg/micro/auth/internal/service"
 )
 
-type TokenServer struct {
+type AuthServer struct {
 	t *service.Service
 }
 
@@ -22,7 +22,7 @@ func New(svc *service.Service) *warden.Server {
 		}
 	}
 	ws := warden.NewServer(rc.Server)
-	pb.RegisterAccountServer(ws.Server(), &TokenServer{t: svc})
+	pb.RegisterAuthServer(ws.Server(), &AuthServer{t: svc})
 	ws, err := ws.Start()
 	if err != nil {
 		panic(err)

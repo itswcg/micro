@@ -16,9 +16,9 @@
         "application/json"
     ],
     "paths": {
-        "/auth.service.Account/Token": {
+        "/auth.service.Auth/Token": {
             "get": {
-                "summary": "/auth.service.Account/Token",
+                "summary": "/auth.service.Auth/Token",
                 "responses": {
                     "200": {
                         "description": "A successful response.",
@@ -47,7 +47,7 @@
                     }
                 ],
                 "tags": [
-                    "auth.service.Account"
+                    "auth.service.Auth"
                 ]
             }
         }

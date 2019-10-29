@@ -116,7 +116,7 @@ func init() {
 func init() { proto.RegisterFile("api.proto", fileDescriptor_00212fb1f9d3bf1c) }
 
 var fileDescriptor_00212fb1f9d3bf1c = []byte{
-	// 221 bytes of a gzipped FileDescriptorProto
+	// 218 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x4c, 0x2c, 0xc8, 0xd4,
 	0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x49, 0x2c, 0x2d, 0xc9, 0xd0, 0x2b, 0x4e, 0x2d, 0x2a,
 	0xcb, 0x4c, 0x4e, 0x95, 0xd2, 0x4d, 0xcf, 0x2c, 0xc9, 0x28, 0x4d, 0xd2, 0x4b, 0xce, 0xcf, 0xd5,
@@ -125,12 +125,12 @@ var fileDescriptor_00212fb1f9d3bf1c = []byte{
 	0x2f, 0x2f, 0xbf, 0x24, 0xb1, 0x24, 0x33, 0x3f, 0xaf, 0x18, 0x22, 0xab, 0xa4, 0xc0, 0xc5, 0x11,
 	0x92, 0x9f, 0x9d, 0x9a, 0x17, 0x94, 0x5a, 0x28, 0x24, 0xc2, 0xc5, 0x5a, 0x02, 0x62, 0x4b, 0x30,
 	0x2a, 0x30, 0x6a, 0x70, 0x06, 0x41, 0x38, 0x4a, 0x72, 0x5c, 0x5c, 0x50, 0x15, 0x05, 0x39, 0x95,
-	0x42, 0x02, 0x5c, 0xcc, 0xb9, 0x99, 0x29, 0x60, 0x15, 0xcc, 0x41, 0x20, 0xa6, 0x91, 0x0b, 0x17,
-	0xbb, 0x63, 0x72, 0x72, 0x7e, 0x69, 0x5e, 0x89, 0x90, 0x25, 0x17, 0x2b, 0x58, 0xa9, 0x90, 0x98,
-	0x1e, 0xb2, 0x8b, 0xf5, 0x60, 0x36, 0x48, 0x49, 0x60, 0x15, 0x2f, 0xc8, 0xa9, 0x74, 0x92, 0x3c,
-	0xf1, 0x50, 0x8e, 0xe1, 0xc4, 0x23, 0x39, 0xc6, 0x0b, 0x8f, 0xe4, 0x18, 0x1f, 0x3c, 0x92, 0x63,
-	0x9c, 0xf1, 0x58, 0x8e, 0x21, 0x8a, 0x39, 0xb1, 0x20, 0x33, 0x89, 0x0d, 0xec, 0x52, 0x63, 0x40,
-	0x00, 0x00, 0x00, 0xff, 0xff, 0x71, 0xdd, 0xd8, 0xa0, 0x11, 0x01, 0x00, 0x00,
+	0x42, 0x02, 0x5c, 0xcc, 0xb9, 0x99, 0x29, 0x60, 0x15, 0xcc, 0x41, 0x20, 0xa6, 0x91, 0x23, 0x17,
+	0x8b, 0x63, 0x69, 0x49, 0x86, 0x90, 0x25, 0x17, 0x2b, 0x58, 0x9d, 0x90, 0x98, 0x1e, 0xb2, 0x73,
+	0xf5, 0x60, 0xc6, 0x4b, 0x49, 0x60, 0x15, 0x2f, 0xc8, 0xa9, 0x74, 0x92, 0x3c, 0xf1, 0x50, 0x8e,
+	0xe1, 0xc4, 0x23, 0x39, 0xc6, 0x0b, 0x8f, 0xe4, 0x18, 0x1f, 0x3c, 0x92, 0x63, 0x9c, 0xf1, 0x58,
+	0x8e, 0x21, 0x8a, 0x39, 0xb1, 0x20, 0x33, 0x89, 0x0d, 0xec, 0x4c, 0x63, 0x40, 0x00, 0x00, 0x00,
+	0xff, 0xff, 0x56, 0x17, 0xe4, 0x49, 0x0e, 0x01, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -141,72 +141,72 @@ var _ grpc.ClientConn
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion4
 
-// AccountClient is the client API for Account service.
+// AuthClient is the client API for Auth service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type AccountClient interface {
+type AuthClient interface {
 	Token(ctx context.Context, in *TokenReq, opts ...grpc.CallOption) (*TokenReply, error)
 }
 
-type accountClient struct {
+type authClient struct {
 	cc *grpc.ClientConn
 }
 
-func NewAccountClient(cc *grpc.ClientConn) AccountClient {
-	return &accountClient{cc}
+func NewAuthClient(cc *grpc.ClientConn) AuthClient {
+	return &authClient{cc}
 }
 
-func (c *accountClient) Token(ctx context.Context, in *TokenReq, opts ...grpc.CallOption) (*TokenReply, error) {
+func (c *authClient) Token(ctx context.Context, in *TokenReq, opts ...grpc.CallOption) (*TokenReply, error) {
 	out := new(TokenReply)
-	err := c.cc.Invoke(ctx, "/auth.service.Account/Token", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/auth.service.Auth/Token", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// AccountServer is the server API for Account service.
-type AccountServer interface {
+// AuthServer is the server API for Auth service.
+type AuthServer interface {
 	Token(context.Context, *TokenReq) (*TokenReply, error)
 }
 
-// UnimplementedAccountServer can be embedded to have forward compatible implementations.
-type UnimplementedAccountServer struct {
+// UnimplementedAuthServer can be embedded to have forward compatible implementations.
+type UnimplementedAuthServer struct {
 }
 
-func (*UnimplementedAccountServer) Token(ctx context.Context, req *TokenReq) (*TokenReply, error) {
+func (*UnimplementedAuthServer) Token(ctx context.Context, req *TokenReq) (*TokenReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Token not implemented")
 }
 
-func RegisterAccountServer(s *grpc.Server, srv AccountServer) {
-	s.RegisterService(&_Account_serviceDesc, srv)
+func RegisterAuthServer(s *grpc.Server, srv AuthServer) {
+	s.RegisterService(&_Auth_serviceDesc, srv)
 }
 
-func _Account_Token_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Auth_Token_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(TokenReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountServer).Token(ctx, in)
+		return srv.(AuthServer).Token(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/auth.service.Account/Token",
+		FullMethod: "/auth.service.Auth/Token",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServer).Token(ctx, req.(*TokenReq))
+		return srv.(AuthServer).Token(ctx, req.(*TokenReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-var _Account_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "auth.service.Account",
-	HandlerType: (*AccountServer)(nil),
+var _Auth_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "auth.service.Auth",
+	HandlerType: (*AuthServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "Token",
-			Handler:    _Account_Token_Handler,
+			Handler:    _Auth_Token_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

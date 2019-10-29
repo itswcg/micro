@@ -5,7 +5,7 @@ import (
 	"github.com/itswcg/micro/auth/api"
 )
 
-func (s *TokenServer) Token(ctx context.Context, req *api.TokenReq) (res *api.TokenReply, err error) {
+func (s *AuthServer) Token(ctx context.Context, req *api.TokenReq) (res *api.TokenReply, err error) {
 	mid, err := s.t.Token(ctx, req.Token)
 	if err != nil {
 		return nil, err

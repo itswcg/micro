@@ -4,8 +4,6 @@
 #### 功能
 account服务提供以下功能:  
 1. 账户信息  
-2. 用户认证  
-3. 权限管理  
 
 http:
 
@@ -13,7 +11,7 @@ http:
 * 登录
 * 修改资料
 * 获取用户资料
-* github授权登录
+* 手机号/用户名/github
 
 rpc:
 
@@ -35,6 +33,7 @@ CREATE TABLE `user_0` (
   `join_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   PRIMARY KEY (`mid`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 ```
 
 #### Todo
@@ -42,3 +41,6 @@ CREATE TABLE `user_0` (
 * 认证选型(基于cookie,session?基于token?基于jwt?)
 * migrate工具
 * token 认证, rpc认证?
+* 验证码服务
+* 邮箱验证
+* 短信验证

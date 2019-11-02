@@ -69,3 +69,32 @@ func (s *Service) NextID(ctx context.Context) (id int64, err error) {
 	}
 	return LeafReply.Id, nil
 }
+
+// Hash password
+func (s *Service) GeneratePassword(ctx context.Context, password string) (hash_password string, err error) {
+	hash_password = password + "test"
+	return
+}
+
+// Check password
+func (s *Service) CheckPassword(ctx context.Context, mid int64, password string) (pass bool, err error) {
+	hash_password, err := s.GeneratePassword(ctx, password)
+	if err != nil {
+		return
+	}
+	db_password, err := s.dao.GetPassword(ctx, mid)
+	if err != nil {
+		return
+	}
+	if hash_password == db_password {
+		pass = true
+	}
+	return
+}
+
+// Generate unique token
+func (s *Service) GenerateToken(ctx context.Context) (token string, err error) {
+	// 实现
+	token = "test"
+	return
+}

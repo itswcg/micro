@@ -5,7 +5,6 @@ import (
 	"database/sql"
 	"fmt"
 	"github.com/itswcg/micro/account/api"
-	"github.com/itswcg/micro/account/internal/model"
 	"github.com/prometheus/common/log"
 )
 
@@ -14,12 +13,12 @@ const (
 )
 
 const (
-	_selInfoById    = "select mid,name,sex,face from user_%d where mid=?"
-	_selProfileById = "select mid,name,sex,face,email,phone,join_time from user_%d where mid=?"
+	_selInfoById     = "select mid,name,sex,face from user_%d where mid=?"
+	_selProfileById  = "select mid,name,sex,face,email,phone,join_time from user_%d where mid=?"
+	_selPasswordById = "select password from user_%d where mid=?"
 
-	_insertInfo  = "insert into user_%d(mid,name,sex,face) values (?,?,?,?) on duplicate key update name=?,sex=?,face=?"
-	_updateEmail = "update user_%d set email=? where mid=?"
-	_updatePhone = "update user_%d set phone=? where mid=?"
+	_insertInfo = "insert into user_%d(mid,name,password) values (?,?,?) on duplicate key update name=?,password=?"
+	_updateInfo = "update user_%d set %s=? where mid=?"
 )
 
 func (d *dao) hit(mid int64) int64 {
@@ -54,24 +53,28 @@ func (d *dao) GetProfile(ctx context.Context, mid int64) (r *api.Profile, err er
 	return
 }
 
-func (d *dao) AddInfo(ctx context.Context, info *model.Info) (err error) {
-	_, err = d.db.Exec(ctx, fmt.Sprintf(_insertInfo, d.hit(info.Mid)), info.Mid, info.Name, info.Sex, info.Face, info.Name, info.Sex, info.Face)
+func (d *dao) GetPassword(ctx context.Context, mid int64) (password string, err error) {
+	row := d.db.QueryRow(ctx, fmt.Sprintf(_selPasswordById, d.hit(mid)), mid)
+	if err = row.Scan(password); err != nil {
+		if err == sql.ErrNoRows {
+			err = nil
+		} else {
+			log.Error("row.Scan error(%v)", err)
+		}
+	}
+	return
+}
+
+func (d *dao) AddInfo(ctx context.Context, mid int64, name, password string) (err error) {
+	_, err = d.db.Exec(ctx, fmt.Sprintf(_insertInfo, d.hit(mid)), mid, name, password, name, password)
 	if err != nil {
 		log.Error("db.Exec error(%v)", err)
 	}
 	return
 }
 
-func (d *dao) SetEmail(ctx context.Context, mid int64, email string) (err error) {
-	_, err = d.db.Exec(ctx, fmt.Sprintf(_updateEmail, d.hit(mid)), email, mid)
-	if err != nil {
-		log.Error("db.Exec error(%v)", err)
-	}
-	return
-}
-
-func (d *dao) SetPhone(ctx context.Context, mid int64, phone string) (err error) {
-	_, err = d.db.Exec(ctx, fmt.Sprintf(_updatePhone, d.hit(mid)), phone, mid)
+func (d *dao) SetInfo(ctx context.Context, mid int64, field, value string) (err error) {
+	_, err = d.db.Exec(ctx, fmt.Sprintf(_updateInfo, d.hit(mid), field), value, mid)
 	if err != nil {
 		log.Error("db.Exec error(%v)", err)
 	}

@@ -6,3 +6,8 @@ type Info struct {
 	Sex  string `protobuf:"bytes,3,opt,name=sex,proto3" json:"sex"`
 	Face string `protobuf:"bytes,4,opt,name=face,proto3" json:"face"`
 }
+
+type TokenInfo struct {
+	Info
+	Token string `json:"token"`
+}

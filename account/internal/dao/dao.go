@@ -3,7 +3,6 @@ package dao
 import (
 	"context"
 	"github.com/itswcg/micro/account/api"
-	"github.com/itswcg/micro/account/internal/model"
 	"time"
 
 	"github.com/bilibili/kratos/pkg/cache/redis"
@@ -19,9 +18,9 @@ type Dao interface {
 	Ping(ctx context.Context) (err error)
 	GetInfo(ctx context.Context, mid int64) (r *api.Info, err error)
 	GetProfile(ctx context.Context, mid int64) (r *api.Profile, err error)
-	AddInfo(ctx context.Context, info *model.Info) (err error)
-	SetEmail(ctx context.Context, mid int64, email string) (err error)
-	SetPhone(ctx context.Context, mid int64, phone string) (err error)
+	GetPassword(ctx context.Context, mid int64) (password string, err error)
+	AddInfo(ctx context.Context, mid int64, name, password string) (err error)
+	SetInfo(ctx context.Context, mid int64, field, value string) (err error)
 }
 
 // dao dao.

@@ -48,10 +48,13 @@ func initRouter(e *bm.Engine) {
 	e.Ping(ping)
 	g := e.Group("/account")
 	{
-		g.POST("sign_up", authn.AllowAny, AddInfo)
-		g.POST("sign_in", authn.AllowAny)
-		g.GET("/info", Info, authn.IsAuthenticated)
-		g.GET("/profile", Profile, authn.IsAuthenticated)
+		g.POST("/sign_up", authn.AllowAny, SignUp)
+		g.POST("/sign_in", authn.AllowAny, SignIn)
+		g.GET("/info", authn.IsAuthenticated, Info)
+		g.GET("/profile", authn.IsAuthenticated, Profile)
+		g.POST("/password/update", authn.IsAuthenticated, SetPassword)
+		g.POST("/sex/update", authn.IsAuthenticated, SetSex)
+		g.POST("/face/update", authn.IsAuthenticated, SetFace)
 		g.POST("/email/update", authn.IsAuthenticated, SetEmail)
 		g.POST("/phone/update", authn.IsAuthenticated, SetPhone)
 

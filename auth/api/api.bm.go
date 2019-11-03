@@ -16,10 +16,13 @@ var _ context.Context
 var _ binding.StructValidator
 
 var PathAuthToken = "/auth.service.Auth/Token"
+var PathAuthSetToken = "/auth.service.Auth/SetToken"
 
 // AuthBMServer is the server API for Auth service.
 type AuthBMServer interface {
 	Token(ctx context.Context, req *TokenReq) (resp *TokenReply, err error)
+
+	SetToken(ctx context.Context, req *SetTokenReq) (resp *SetTokenReply, err error)
 }
 
 var AuthSvc AuthBMServer
@@ -33,8 +36,18 @@ func authToken(c *bm.Context) {
 	c.JSON(resp, err)
 }
 
+func authSetToken(c *bm.Context) {
+	p := new(SetTokenReq)
+	if err := c.BindWith(p, binding.Default(c.Request.Method, c.Request.Header.Get("Content-Type"))); err != nil {
+		return
+	}
+	resp, err := AuthSvc.SetToken(c, p)
+	c.JSON(resp, err)
+}
+
 // RegisterAuthBMServer Register the blademaster route
 func RegisterAuthBMServer(e *bm.Engine, server AuthBMServer) {
 	AuthSvc = server
 	e.GET("/auth.service.Auth/Token", authToken)
+	e.GET("/auth.service.Auth/SetToken", authSetToken)
 }

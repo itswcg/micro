@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
-import "google/api/annotations.proto";
+//import "google/api/annotations.proto";
 
 package auth.service;
 
@@ -16,6 +16,16 @@ message TokenReply {
     int64 mid = 1;
 }
 
+message SetTokenReq {
+    string token = 1;
+    int64 mid = 2;
+}
+
+message SetTokenReply {
+    bool success = 1;
+}
+
 service Auth {
     rpc Token (TokenReq) returns (TokenReply);
+    rpc SetToken (SetTokenReq) returns(SetTokenReply);
 }

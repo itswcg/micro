@@ -16,6 +16,47 @@
         "application/json"
     ],
     "paths": {
+        "/auth.service.Auth/SetToken": {
+            "get": {
+                "summary": "/auth.service.Auth/SetToken",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.auth.service.SetTokenReply"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "mid",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "auth.service.Auth"
+                ]
+            }
+        },
         "/auth.service.Auth/Token": {
             "get": {
                 "summary": "/auth.service.Auth/Token",
@@ -53,6 +94,25 @@
         }
     },
     "definitions": {
+        ".auth.service.SetTokenReply": {
+            "type": "object",
+            "properties": {
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        ".auth.service.SetTokenReq": {
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string"
+                },
+                "mid": {
+                    "type": "integer"
+                }
+            }
+        },
         ".auth.service.TokenReply": {
             "type": "object",
             "properties": {

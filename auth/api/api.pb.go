@@ -8,7 +8,6 @@ import (
 	fmt "fmt"
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/golang/protobuf/proto"
-	_ "google.golang.org/genproto/googleapis/api/annotations"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -108,29 +107,114 @@ func (m *TokenReply) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_TokenReply proto.InternalMessageInfo
 
+type SetTokenReq struct {
+	Token                string   `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	Mid                  int64    `protobuf:"varint,2,opt,name=mid,proto3" json:"mid,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *SetTokenReq) Reset()         { *m = SetTokenReq{} }
+func (m *SetTokenReq) String() string { return proto.CompactTextString(m) }
+func (*SetTokenReq) ProtoMessage()    {}
+func (*SetTokenReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_00212fb1f9d3bf1c, []int{2}
+}
+func (m *SetTokenReq) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *SetTokenReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_SetTokenReq.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *SetTokenReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SetTokenReq.Merge(m, src)
+}
+func (m *SetTokenReq) XXX_Size() int {
+	return m.Size()
+}
+func (m *SetTokenReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_SetTokenReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_SetTokenReq proto.InternalMessageInfo
+
+type SetTokenReply struct {
+	Success              bool     `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *SetTokenReply) Reset()         { *m = SetTokenReply{} }
+func (m *SetTokenReply) String() string { return proto.CompactTextString(m) }
+func (*SetTokenReply) ProtoMessage()    {}
+func (*SetTokenReply) Descriptor() ([]byte, []int) {
+	return fileDescriptor_00212fb1f9d3bf1c, []int{3}
+}
+func (m *SetTokenReply) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *SetTokenReply) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_SetTokenReply.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *SetTokenReply) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SetTokenReply.Merge(m, src)
+}
+func (m *SetTokenReply) XXX_Size() int {
+	return m.Size()
+}
+func (m *SetTokenReply) XXX_DiscardUnknown() {
+	xxx_messageInfo_SetTokenReply.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_SetTokenReply proto.InternalMessageInfo
+
 func init() {
 	proto.RegisterType((*TokenReq)(nil), "auth.service.TokenReq")
 	proto.RegisterType((*TokenReply)(nil), "auth.service.TokenReply")
+	proto.RegisterType((*SetTokenReq)(nil), "auth.service.SetTokenReq")
+	proto.RegisterType((*SetTokenReply)(nil), "auth.service.SetTokenReply")
 }
 
 func init() { proto.RegisterFile("api.proto", fileDescriptor_00212fb1f9d3bf1c) }
 
 var fileDescriptor_00212fb1f9d3bf1c = []byte{
-	// 218 bytes of a gzipped FileDescriptorProto
+	// 248 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x4c, 0x2c, 0xc8, 0xd4,
 	0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x49, 0x2c, 0x2d, 0xc9, 0xd0, 0x2b, 0x4e, 0x2d, 0x2a,
 	0xcb, 0x4c, 0x4e, 0x95, 0xd2, 0x4d, 0xcf, 0x2c, 0xc9, 0x28, 0x4d, 0xd2, 0x4b, 0xce, 0xcf, 0xd5,
 	0x4f, 0xcf, 0x4f, 0xcf, 0xd7, 0x07, 0x2b, 0x4a, 0x2a, 0x4d, 0x03, 0xf3, 0xc0, 0x1c, 0x30, 0x0b,
-	0xa2, 0x59, 0x4a, 0x26, 0x3d, 0x3f, 0x3f, 0x3d, 0x27, 0x55, 0x3f, 0xb1, 0x20, 0x53, 0x3f, 0x31,
-	0x2f, 0x2f, 0xbf, 0x24, 0xb1, 0x24, 0x33, 0x3f, 0xaf, 0x18, 0x22, 0xab, 0xa4, 0xc0, 0xc5, 0x11,
-	0x92, 0x9f, 0x9d, 0x9a, 0x17, 0x94, 0x5a, 0x28, 0x24, 0xc2, 0xc5, 0x5a, 0x02, 0x62, 0x4b, 0x30,
-	0x2a, 0x30, 0x6a, 0x70, 0x06, 0x41, 0x38, 0x4a, 0x72, 0x5c, 0x5c, 0x50, 0x15, 0x05, 0x39, 0x95,
-	0x42, 0x02, 0x5c, 0xcc, 0xb9, 0x99, 0x29, 0x60, 0x15, 0xcc, 0x41, 0x20, 0xa6, 0x91, 0x23, 0x17,
-	0x8b, 0x63, 0x69, 0x49, 0x86, 0x90, 0x25, 0x17, 0x2b, 0x58, 0x9d, 0x90, 0x98, 0x1e, 0xb2, 0x73,
-	0xf5, 0x60, 0xc6, 0x4b, 0x49, 0x60, 0x15, 0x2f, 0xc8, 0xa9, 0x74, 0x92, 0x3c, 0xf1, 0x50, 0x8e,
-	0xe1, 0xc4, 0x23, 0x39, 0xc6, 0x0b, 0x8f, 0xe4, 0x18, 0x1f, 0x3c, 0x92, 0x63, 0x9c, 0xf1, 0x58,
-	0x8e, 0x21, 0x8a, 0x39, 0xb1, 0x20, 0x33, 0x89, 0x0d, 0xec, 0x4c, 0x63, 0x40, 0x00, 0x00, 0x00,
-	0xff, 0xff, 0x56, 0x17, 0xe4, 0x49, 0x0e, 0x01, 0x00, 0x00,
+	0xa2, 0x59, 0x49, 0x81, 0x8b, 0x23, 0x24, 0x3f, 0x3b, 0x35, 0x2f, 0x28, 0xb5, 0x50, 0x48, 0x84,
+	0x8b, 0xb5, 0x04, 0xc4, 0x96, 0x60, 0x54, 0x60, 0xd4, 0xe0, 0x0c, 0x82, 0x70, 0x94, 0xe4, 0xb8,
+	0xb8, 0xa0, 0x2a, 0x0a, 0x72, 0x2a, 0x85, 0x04, 0xb8, 0x98, 0x73, 0x33, 0x53, 0xc0, 0x2a, 0x98,
+	0x83, 0x40, 0x4c, 0x25, 0x53, 0x2e, 0xee, 0xe0, 0xd4, 0x12, 0xfc, 0x86, 0xc0, 0xb4, 0x31, 0x21,
+	0xb4, 0x69, 0x72, 0xf1, 0x22, 0xb4, 0x81, 0x4c, 0x96, 0xe0, 0x62, 0x2f, 0x2e, 0x4d, 0x4e, 0x4e,
+	0x2d, 0x2e, 0x06, 0x6b, 0xe5, 0x08, 0x82, 0x71, 0x8d, 0x5a, 0x19, 0xb9, 0x58, 0x1c, 0x4b, 0x4b,
+	0x32, 0x84, 0x2c, 0xb9, 0x58, 0xc1, 0x1a, 0x84, 0xc4, 0xf4, 0x90, 0xfd, 0xac, 0x07, 0xb3, 0x5c,
+	0x4a, 0x02, 0xab, 0x38, 0xc8, 0x74, 0x27, 0x2e, 0x0e, 0x98, 0x75, 0x42, 0x92, 0xa8, 0xaa, 0x90,
+	0x5c, 0x2f, 0x25, 0x8d, 0x4b, 0xaa, 0x20, 0xa7, 0xd2, 0x49, 0xf2, 0xc4, 0x43, 0x39, 0x86, 0x13,
+	0x8f, 0xe4, 0x18, 0x2f, 0x3c, 0x92, 0x63, 0x7c, 0xf0, 0x48, 0x8e, 0x71, 0xc6, 0x63, 0x39, 0x86,
+	0x28, 0xe6, 0xc4, 0x82, 0xcc, 0x24, 0x36, 0x70, 0x68, 0x1a, 0x03, 0x02, 0x00, 0x00, 0xff, 0xff,
+	0x4f, 0x79, 0x9a, 0x75, 0x97, 0x01, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -146,6 +230,7 @@ const _ = grpc.SupportPackageIsVersion4
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type AuthClient interface {
 	Token(ctx context.Context, in *TokenReq, opts ...grpc.CallOption) (*TokenReply, error)
+	SetToken(ctx context.Context, in *SetTokenReq, opts ...grpc.CallOption) (*SetTokenReply, error)
 }
 
 type authClient struct {
@@ -165,9 +250,19 @@ func (c *authClient) Token(ctx context.Context, in *TokenReq, opts ...grpc.CallO
 	return out, nil
 }
 
+func (c *authClient) SetToken(ctx context.Context, in *SetTokenReq, opts ...grpc.CallOption) (*SetTokenReply, error) {
+	out := new(SetTokenReply)
+	err := c.cc.Invoke(ctx, "/auth.service.Auth/SetToken", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AuthServer is the server API for Auth service.
 type AuthServer interface {
 	Token(context.Context, *TokenReq) (*TokenReply, error)
+	SetToken(context.Context, *SetTokenReq) (*SetTokenReply, error)
 }
 
 // UnimplementedAuthServer can be embedded to have forward compatible implementations.
@@ -176,6 +271,9 @@ type UnimplementedAuthServer struct {
 
 func (*UnimplementedAuthServer) Token(ctx context.Context, req *TokenReq) (*TokenReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Token not implemented")
+}
+func (*UnimplementedAuthServer) SetToken(ctx context.Context, req *SetTokenReq) (*SetTokenReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetToken not implemented")
 }
 
 func RegisterAuthServer(s *grpc.Server, srv AuthServer) {
@@ -200,6 +298,24 @@ func _Auth_Token_Handler(srv interface{}, ctx context.Context, dec func(interfac
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Auth_SetToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetTokenReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServer).SetToken(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/auth.service.Auth/SetToken",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServer).SetToken(ctx, req.(*SetTokenReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Auth_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "auth.service.Auth",
 	HandlerType: (*AuthServer)(nil),
@@ -207,6 +323,10 @@ var _Auth_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Token",
 			Handler:    _Auth_Token_Handler,
+		},
+		{
+			MethodName: "SetToken",
+			Handler:    _Auth_SetToken_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -279,6 +399,82 @@ func (m *TokenReply) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *SetTokenReq) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *SetTokenReq) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *SetTokenReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	if m.Mid != 0 {
+		i = encodeVarintApi(dAtA, i, uint64(m.Mid))
+		i--
+		dAtA[i] = 0x10
+	}
+	if len(m.Token) > 0 {
+		i -= len(m.Token)
+		copy(dAtA[i:], m.Token)
+		i = encodeVarintApi(dAtA, i, uint64(len(m.Token)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *SetTokenReply) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *SetTokenReply) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *SetTokenReply) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	if m.Success {
+		i--
+		if m.Success {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintApi(dAtA []byte, offset int, v uint64) int {
 	offset -= sovApi(v)
 	base := offset
@@ -314,6 +510,40 @@ func (m *TokenReply) Size() (n int) {
 	_ = l
 	if m.Mid != 0 {
 		n += 1 + sovApi(uint64(m.Mid))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *SetTokenReq) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Token)
+	if l > 0 {
+		n += 1 + l + sovApi(uint64(l))
+	}
+	if m.Mid != 0 {
+		n += 1 + sovApi(uint64(m.Mid))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *SetTokenReply) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Success {
+		n += 2
 	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
@@ -461,6 +691,185 @@ func (m *TokenReply) Unmarshal(dAtA []byte) error {
 					break
 				}
 			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipApi(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthApi
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthApi
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *SetTokenReq) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowApi
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: SetTokenReq: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: SetTokenReq: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Token", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowApi
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthApi
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthApi
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Token = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Mid", wireType)
+			}
+			m.Mid = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowApi
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Mid |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipApi(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthApi
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthApi
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *SetTokenReply) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowApi
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: SetTokenReply: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: SetTokenReply: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Success", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowApi
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Success = bool(v != 0)
 		default:
 			iNdEx = preIndex
 			skippy, err := skipApi(dAtA[iNdEx:])

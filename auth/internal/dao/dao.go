@@ -41,15 +41,21 @@ func New() Dao {
 		rc struct {
 			Redis       *redis.Config
 			RedisExpire xtime.Duration
+			RedisDb     int
 		}
 	)
 	checkErr(paladin.Get("mysql.toml").UnmarshalTOML(&dc))
 	checkErr(paladin.Get("redis.toml").UnmarshalTOML(&rc))
+
+	//options := []redis.DialOption{
+	//	redis.DialDatabase(rc.RedisDb),
+	//}
+
 	return &dao{
 		// mysql
 		db: sql.NewMySQL(dc.Mysql),
 		// redis
-		redis:       redis.NewPool(rc.Redis),
+		redis:       redis.NewPool(rc.Redis, redis.DialDatabase(rc.RedisDb)),
 		redisExpire: int32(time.Duration(rc.RedisExpire) / time.Second),
 	}
 }

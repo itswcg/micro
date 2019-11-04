@@ -49,19 +49,26 @@ func SignUp(ctx *bm.Context) {
 	)
 
 	// check name ? 判断唯一,大数据?
+	token, err := u.GenerateToken(ctx)
+	if err != nil {
+		ctx.JSON(nil, err)
+		return
+	}
 
 	mid, err := u.AddInfo(ctx, name, password)
 	if err != nil {
 		ctx.JSON(nil, ecode.RequestErr)
 		return
 	}
-	info, err := u.GetProfile(ctx, mid)
+
+	// set token to redis
+	err = u.SetToken(ctx, token, mid)
 	if err != nil {
 		ctx.JSON(nil, err)
 		return
 	}
 
-	token, err := u.GenerateToken(ctx)
+	info, err := u.GetProfile(ctx, mid)
 	if err != nil {
 		ctx.JSON(nil, err)
 		return
@@ -74,16 +81,15 @@ func SignUp(ctx *bm.Context) {
 
 func SignIn(ctx *bm.Context) {
 	var (
-		err      error
-		params   = ctx.Request.Form
-		name     = params.Get("name")
+		err    error
+		params = ctx.Request.Form
+		//name     = params.Get("name")
 		password = params.Get("password")
 	)
 
 	// 通过name 获取mid
-	mid := new(int64)
 
-	pass, err := u.CheckPassword(ctx, mid, password)
+	pass, err := u.CheckPassword(ctx, 1000, password)
 	if err != nil {
 		ctx.JSON(nil, ecode.RequestErr)
 		return

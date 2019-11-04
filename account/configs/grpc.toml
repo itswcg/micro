@@ -4,3 +4,5 @@
     timeout = "1s"
 
 [leafClient]
+
+[authClient]

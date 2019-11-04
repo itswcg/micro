@@ -2,24 +2,28 @@ package service
 
 import (
 	"context"
+	"errors"
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 	"github.com/bilibili/kratos/pkg/net/rpc/warden"
 	"github.com/itswcg/micro/account/internal/dao"
+	authrpc "github.com/itswcg/micro/auth/api"
 	leafrpc "github.com/itswcg/micro/leaf/api"
 	"github.com/prometheus/common/log"
 )
 
 // Service service.
 type Service struct {
-	ac  *paladin.Map
-	dao dao.Dao
-	lc  leafrpc.LeafClient
+	ac    *paladin.Map
+	dao   dao.Dao
+	lcSrv leafrpc.LeafClient
+	acSrv authrpc.AuthClient
 }
 
 // New new a service and return.
 func New() (s *Service) {
 	type Gc struct {
 		LeafClient *warden.ClientConfig
+		AuthClient *warden.ClientConfig
 	}
 	var (
 		ac = new(paladin.TOML)
@@ -34,15 +38,21 @@ func New() (s *Service) {
 		panic(err)
 	}
 
-	lc, err := leafrpc.NewClient(gc.LeafClient)
+	lcSrv, err := leafrpc.NewClient(gc.LeafClient)
+	if err != nil {
+		panic(err)
+	}
+
+	acSrv, err := authrpc.NewClient(gc.AuthClient)
 	if err != nil {
 		panic(err)
 	}
 
 	s = &Service{
-		ac:  ac,
-		dao: dao.New(),
-		lc:  lc,
+		ac:    ac,
+		dao:   dao.New(),
+		lcSrv: lcSrv,
+		acSrv: acSrv,
 	}
 	return s
 }
@@ -62,7 +72,7 @@ func (s *Service) NextID(ctx context.Context) (id int64, err error) {
 	LeafReq := &leafrpc.LeafReq{
 		BizTag: "account",
 	}
-	LeafReply, err := s.lc.NextID(ctx, LeafReq)
+	LeafReply, err := s.lcSrv.NextID(ctx, LeafReq)
 	if err != nil {
 		log.Error("s.lc NextID(%v) err(%v)", LeafReq, err)
 		return
@@ -97,4 +107,21 @@ func (s *Service) GenerateToken(ctx context.Context) (token string, err error) {
 	// 实现
 	token = "test"
 	return
+}
+
+// Set Token to auth
+func (s *Service) SetToken(ctx context.Context, token string, mid int64) (err error) {
+	SetTokenReq := &authrpc.SetTokenReq{
+		Token: token,
+		Mid:   mid,
+	}
+	SetTokenReply, err := s.acSrv.SetToken(ctx, SetTokenReq)
+	if err != nil {
+		return
+	}
+	if SetTokenReply.Success == true {
+		return nil
+	} else {
+		return errors.New("SetToken error")
+	}
 }

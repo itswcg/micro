@@ -15,5 +15,10 @@ func (s *AuthServer) Token(ctx context.Context, req *api.TokenReq) (res *api.Tok
 }
 
 func (s *AuthServer) SetToken(ctx context.Context, req *api.SetTokenReq) (res *api.SetTokenReply, err error) {
-	return
+	err = s.t.SetToken(ctx, req.Token, req.Mid)
+	if err != nil {
+		return nil, err
+	}
+
+	return &api.SetTokenReply{Success: true}, nil
 }

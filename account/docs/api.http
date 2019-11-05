@@ -2,12 +2,12 @@
 
 ### 创建用户
 POST {{base_account}}/sign_up
-Content-Type: application/json
+Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 
 {
-  "name": "hh",
-  "password": "123"
+  "name": "wcg",
+  "password": "wcg123"
 }
 
 ### 登录
@@ -16,46 +16,66 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "name": "hh",
-  "password": "123"
+  "name": "wcg",
+  "password": "wcg123"
 }
 
 ### 获取基本信息
-GET {{base_account}}/info?mid=10075
-Authorization: {{base_token}}
+GET {{base_account}}/info?mid={{mid}}
+Authorization: {{token}}
 Accept: application/json
 
 ### 获取资料
-GET {{base_account}}/profile?mid=10075
-Authorization: {{base_token}}
+GET {{base_account}}/profile?mid={{mid}}
+Authorization: {{token}}
 Accept: application/json
 
 ### 修改密码
 POST {{base_account}}/password/update
-Authorization: {{base_token}}
+Authorization: {{token}}
 Content-Type: application/json
 Accept: application/json
+
+{
+  "password": "wcg"
+}
 
 ### 修改性别
 POST {{base_account}}/sex/update
-Authorization: {{base_token}}
+Authorization: {{token}}
 Content-Type: application/json
 Accept: application/json
+
+{
+  "sex": "1"
+}
 
 ### 修改头像
 POST {{base_account}}/face/update
-Authorization: {{base_token}}
+Authorization: {{token}}
 Content-Type: application/json
 Accept: application/json
+
+{
+  "face": "www.itswcg.com"
+}
 
 ### 修改email
 POST {{base_account}}/email/update
-Authorization: {{base_token}}
+Authorization: {{token}}
 Content-Type: application/json
 Accept: application/json
 
+{
+  "email": "itswcg@gmail.com"
+}
+
 ### 修改phone
 POST {{base_account}}/phone/update
-Authorization: {{base_token}}
+Authorization: {{token}}
 Content-Type: application/json
 Accept: application/json
+
+{
+  "phone": "12345678910"
+}

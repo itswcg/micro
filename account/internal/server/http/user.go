@@ -49,6 +49,7 @@ func SignUp(ctx *bm.Context) {
 	)
 
 	// check name ? 判断唯一,大数据?
+
 	token, err := u.GenerateToken(ctx)
 	if err != nil {
 		ctx.JSON(nil, err)

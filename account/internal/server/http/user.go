@@ -25,12 +25,11 @@ func Info(ctx *bm.Context) {
 
 func Profile(ctx *bm.Context) {
 	var (
-		err error
-		mid int64
+		err    error
+		mid    int64
+		params = ctx.Request.Form
+		midStr = params.Get("mid")
 	)
-
-	params := ctx.Request.Form
-	midStr := params.Get("mid")
 
 	if mid, err = strconv.ParseInt(midStr, 10, 64); err != nil {
 		ctx.JSON(nil, ecode.RequestErr)
@@ -41,12 +40,19 @@ func Profile(ctx *bm.Context) {
 }
 
 func SignUp(ctx *bm.Context) {
+	type Request struct {
+		Name     string
+		Password string
+	}
+
 	var (
-		err      error
-		params   = ctx.Request.Form
-		name     = params.Get("name")
-		password = params.Get("password")
+		req Request
+		err error
 	)
+
+	if err = ctx.Bind(&req); err != nil {
+		return
+	}
 
 	// check name ? 判断唯一,大数据?
 
@@ -56,7 +62,7 @@ func SignUp(ctx *bm.Context) {
 		return
 	}
 
-	mid, err := u.AddInfo(ctx, name, password)
+	mid, err := u.AddInfo(ctx, req.Name, req.Password)
 	if err != nil {
 		ctx.JSON(nil, ecode.RequestErr)
 		return
@@ -81,16 +87,23 @@ func SignUp(ctx *bm.Context) {
 }
 
 func SignIn(ctx *bm.Context) {
+	type Request struct {
+		Name     string
+		Password string
+	}
+
 	var (
-		err    error
-		params = ctx.Request.Form
-		//name     = params.Get("name")
-		password = params.Get("password")
+		err error
+		req Request
 	)
+
+	if err = ctx.Bind(&req); err != nil {
+		return
+	}
 
 	// 通过name 获取mid
 
-	pass, err := u.CheckPassword(ctx, 1000, password)
+	pass, err := u.CheckPassword(ctx, 1000, req.Password)
 	if err != nil {
 		ctx.JSON(nil, ecode.RequestErr)
 		return
@@ -105,12 +118,19 @@ func SignIn(ctx *bm.Context) {
 }
 
 func SetEmail(ctx *bm.Context) {
+	type Request struct {
+		Email string
+	}
+
 	var (
 		err     error
-		params  = ctx.Request.Form
+		req     Request
 		mid, ok = ctx.Get("mid")
-		email   = params.Get("email")
 	)
+
+	if err = ctx.Bind(&req); err != nil {
+		return
+	}
 
 	if !ok {
 		ctx.JSON(nil, ecode.RequestErr)
@@ -118,7 +138,7 @@ func SetEmail(ctx *bm.Context) {
 	}
 	// check email
 
-	err = u.SetEmail(ctx, mid.(int64), email)
+	err = u.SetEmail(ctx, mid.(int64), req.Email)
 	if err != nil {
 		ctx.JSON(nil, ecode.RequestErr)
 		return
@@ -128,12 +148,19 @@ func SetEmail(ctx *bm.Context) {
 }
 
 func SetPhone(ctx *bm.Context) {
+	type Request struct {
+		Phone string
+	}
+
 	var (
 		err     error
-		params  = ctx.Request.Form
+		req     Request
 		mid, ok = ctx.Get("mid")
-		phone   = params.Get("phone")
 	)
+
+	if err = ctx.Bind(&req); err != nil {
+		return
+	}
 
 	if !ok {
 		ctx.JSON(nil, ecode.RequestErr)
@@ -141,7 +168,7 @@ func SetPhone(ctx *bm.Context) {
 	}
 	// check phone
 
-	err = u.SetPhone(ctx, mid.(int64), phone)
+	err = u.SetPhone(ctx, mid.(int64), req.Phone)
 	if err != nil {
 		ctx.JSON(nil, ecode.RequestErr)
 		return
@@ -151,19 +178,26 @@ func SetPhone(ctx *bm.Context) {
 }
 
 func SetPassword(ctx *bm.Context) {
+	type Request struct {
+		Password string
+	}
+
 	var (
-		err      error
-		params   = ctx.Request.Form
-		mid, ok  = ctx.Get("mid")
-		password = params.Get("password")
+		err     error
+		req     Request
+		mid, ok = ctx.Get("mid")
 	)
+
+	if err = ctx.Bind(&req); err != nil {
+		return
+	}
 
 	if !ok {
 		ctx.JSON(nil, ecode.RequestErr)
 		return
 	}
 
-	err = u.SetPassword(ctx, mid.(int64), password)
+	err = u.SetPassword(ctx, mid.(int64), req.Password)
 	if err != nil {
 		ctx.JSON(nil, ecode.RequestErr)
 		return
@@ -173,19 +207,26 @@ func SetPassword(ctx *bm.Context) {
 }
 
 func SetSex(ctx *bm.Context) {
+	type Request struct {
+		Sex string
+	}
+
 	var (
 		err     error
-		params  = ctx.Request.Form
+		req     Request
 		mid, ok = ctx.Get("mid")
-		sex     = params.Get("sex")
 	)
+
+	if err = ctx.Bind(&req); err != nil {
+		return
+	}
 
 	if !ok {
 		ctx.JSON(nil, ecode.RequestErr)
 		return
 	}
 
-	err = u.SetSex(ctx, mid.(int64), sex)
+	err = u.SetSex(ctx, mid.(int64), req.Sex)
 	if err != nil {
 		ctx.JSON(nil, ecode.RequestErr)
 		return
@@ -195,19 +236,26 @@ func SetSex(ctx *bm.Context) {
 }
 
 func SetFace(ctx *bm.Context) {
+	type Request struct {
+		Face string
+	}
+
 	var (
 		err     error
-		params  = ctx.Request.Form
+		req     Request
 		mid, ok = ctx.Get("mid")
-		face    = params.Get("face")
 	)
+
+	if err = ctx.Bind(&req); err != nil {
+		return
+	}
 
 	if !ok {
 		ctx.JSON(nil, ecode.RequestErr)
 		return
 	}
 
-	err = u.SetFace(ctx, mid.(int64), face)
+	err = u.SetFace(ctx, mid.(int64), req.Face)
 	if err != nil {
 		ctx.JSON(nil, ecode.RequestErr)
 		return

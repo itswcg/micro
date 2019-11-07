@@ -2,11 +2,11 @@
 
 ### 创建用户
 POST {{base_account}}/sign_up
-Content-Type: application/x-www-form-urlencoded
+Content-Type: application/json
 Accept: application/json
 
 {
-  "name": "wcg",
+  "name": "wcg02",
   "password": "wcg123"
 }
 
@@ -79,3 +79,5 @@ Accept: application/json
 {
   "phone": "12345678910"
 }
+
+###

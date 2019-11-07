@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	_prefixToken = "account:token:%s"
+	_prefixToken = "token:%s"
 	_tokenExpire = 60 * 60 * 24 * 15
 )
 

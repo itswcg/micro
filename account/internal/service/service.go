@@ -8,7 +8,9 @@ import (
 	"github.com/itswcg/micro/account/internal/dao"
 	authrpc "github.com/itswcg/micro/auth/api"
 	leafrpc "github.com/itswcg/micro/leaf/api"
+	"github.com/itswcg/micro/middleware/snowflake"
 	"github.com/prometheus/common/log"
+	"strconv"
 )
 
 // Service service.
@@ -105,8 +107,18 @@ func (s *Service) CheckPassword(ctx context.Context, mid int64, password string)
 // Generate unique token
 func (s *Service) GenerateToken(ctx context.Context) (token string, err error) {
 	// 实现
-	token = "test"
-	return
+	workId, err := s.ac.Get("snowflake_worker_id").Int64()
+	if err != nil {
+		return
+	}
+
+	work, err := snowflake.New(workId)
+	if err != nil {
+		return
+	}
+
+	ID := work.GetID()
+	return strconv.FormatInt(ID, 10), nil
 }
 
 // Set Token to auth

@@ -2,6 +2,8 @@ package service
 
 import (
 	"context"
+	"crypto/md5"
+	"encoding/hex"
 	"errors"
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 	"github.com/bilibili/kratos/pkg/net/rpc/warden"
@@ -84,8 +86,14 @@ func (s *Service) NextID(ctx context.Context) (id int64, err error) {
 
 // Hash password
 func (s *Service) GeneratePassword(ctx context.Context, password string) (hash_password string, err error) {
-	hash_password = password + "test"
-	return
+	password_secret, err := s.ac.Get("password_secret").String()
+	if err != nil {
+		return
+	}
+
+	h := md5.New()
+	h.Write([]byte(password + password_secret))
+	return hex.EncodeToString(h.Sum(nil)), nil
 }
 
 // Check password

@@ -38,7 +38,12 @@ func (s *Service) AddInfo(ctx context.Context, name, password string) (mid int64
 		return
 	}
 
-	err = s.dao.AddInfo(ctx, mid, name, password)
+	hash_password, err := s.GeneratePassword(ctx, password)
+	if err != nil {
+		return
+	}
+
+	err = s.dao.AddInfo(ctx, mid, name, hash_password)
 	return
 }
 

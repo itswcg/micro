@@ -73,8 +73,13 @@ func (s *Service) Close() {
 
 // Rpc nextId
 func (s *Service) NextID(ctx context.Context) (id int64, err error) {
+	leaf_tag, err := s.ac.Get("leaf_tag").String()
+
+	if err != nil {
+		return
+	}
 	LeafReq := &leafrpc.LeafReq{
-		BizTag: "account",
+		BizTag: leaf_tag,
 	}
 	LeafReply, err := s.lcSrv.NextID(ctx, LeafReq)
 	if err != nil {

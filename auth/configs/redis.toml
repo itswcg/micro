@@ -3,7 +3,7 @@ redisExpire = "24h"
 redisDb = 2
 
 [redis]
-	name = "account.token"
+	name = "auth"
 	proto = "tcp"
 	addr = "212.64.50.167:2224"
 	auth = "itswcg"

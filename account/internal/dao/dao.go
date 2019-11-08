@@ -21,6 +21,8 @@ type Dao interface {
 	GetPassword(ctx context.Context, mid int64) (password string, err error)
 	AddInfo(ctx context.Context, mid int64, name, password string) (err error)
 	SetInfo(ctx context.Context, mid int64, field, value string) (err error)
+	SetName(ctx context.Context, name string, mid int64) (err error)
+	GetMidByName(ctx context.Context, name string) (mid int64, err error)
 }
 
 // dao dao.
@@ -44,6 +46,7 @@ func New() Dao {
 		}
 		rc struct {
 			Redis       *redis.Config
+			RedisDb     int
 			RedisExpire xtime.Duration
 		}
 	)
@@ -53,7 +56,7 @@ func New() Dao {
 		// mysql
 		db: sql.NewMySQL(dc.Mysql),
 		// redis
-		redis:       redis.NewPool(rc.Redis),
+		redis:       redis.NewPool(rc.Redis, redis.DialDatabase(rc.RedisDb)),
 		redisExpire: int32(time.Duration(rc.RedisExpire) / time.Second),
 	}
 }

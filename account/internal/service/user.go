@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/bilibili/kratos/pkg/ecode"
 	"github.com/itswcg/micro/account/api"
+	"github.com/prometheus/common/log"
 )
 
 func (s *Service) GetInfo(ctx context.Context, mid int64) (info *api.Info, err error) {
@@ -74,5 +75,34 @@ func (s *Service) SetPassword(ctx context.Context, mid int64, password string) (
 	}
 
 	err = s.dao.SetInfo(ctx, mid, "password", hash_passowrd)
+	return
+}
+
+func (s *Service) FilterName(ctx context.Context, name string) (pass bool) {
+	if name == "" {
+		log.Error("name is null")
+		pass = false
+	}
+
+	mid, err := s.GetMidByName(ctx, name)
+	if err != nil {
+		log.Error("getMidByName error(%v)", err)
+		pass = false
+	}
+
+	if mid == 0 {
+		pass = true
+	}
+
+	return
+}
+
+func (s *Service) SetName(ctx context.Context, name string, mid int64) (err error) {
+	err = s.dao.SetName(ctx, name, mid)
+	return
+}
+
+func (s *Service) GetMidByName(ctx context.Context, name string) (mid int64, err error) {
+	mid, err = s.dao.GetMidByName(ctx, name)
 	return
 }

@@ -41,8 +41,8 @@ func Profile(ctx *bm.Context) {
 
 func SignUp(ctx *bm.Context) {
 	type Request struct {
-		Name     string
-		Password string
+		Name     string `json:"name"`
+		Password string `json:"password"`
 	}
 
 	var (
@@ -54,7 +54,11 @@ func SignUp(ctx *bm.Context) {
 		return
 	}
 
-	// check name ? 判断唯一,大数据?
+	// check name
+	pass := u.FilterName(ctx, req.Name)
+	if pass == false {
+		ctx.JSON(nil, ecode.RequestErr)
+	}
 
 	token, err := u.GenerateToken(ctx)
 	if err != nil {
@@ -63,6 +67,12 @@ func SignUp(ctx *bm.Context) {
 	}
 
 	mid, err := u.AddInfo(ctx, req.Name, req.Password)
+	if err != nil {
+		ctx.JSON(nil, ecode.RequestErr)
+		return
+	}
+
+	err = u.SetName(ctx, req.Name, mid)
 	if err != nil {
 		ctx.JSON(nil, ecode.RequestErr)
 		return
@@ -88,8 +98,8 @@ func SignUp(ctx *bm.Context) {
 
 func SignIn(ctx *bm.Context) {
 	type Request struct {
-		Name     string
-		Password string
+		Name     string `json:"name"`
+		Password string `json:"password"`
 	}
 
 	var (
@@ -102,8 +112,13 @@ func SignIn(ctx *bm.Context) {
 	}
 
 	// 通过name 获取mid
+	mid, err := u.GetMidByName(ctx, req.Name)
+	if err != nil || mid == 0 {
+		ctx.JSON(nil, ecode.RequestErr)
+		return
+	}
 
-	pass, err := u.CheckPassword(ctx, 1000, req.Password)
+	pass, err := u.CheckPassword(ctx, mid, req.Password)
 	if err != nil {
 		ctx.JSON(nil, ecode.RequestErr)
 		return
@@ -114,12 +129,33 @@ func SignIn(ctx *bm.Context) {
 		return
 	}
 
-	ctx.JSON(nil, err)
+	// Todo delete old token
+	token, err := u.GenerateToken(ctx)
+	if err != nil {
+		ctx.JSON(nil, err)
+		return
+	}
+
+	err = u.SetToken(ctx, token, mid)
+	if err != nil {
+		ctx.JSON(nil, err)
+		return
+	}
+
+	info, err := u.GetProfile(ctx, mid)
+	if err != nil {
+		ctx.JSON(nil, err)
+		return
+	}
+
+	res := model.TokenInfo{Info: model.Info{Mid: info.Mid, Name: info.Name, Sex: info.Sex, Face: info.Face}, Token: token}
+
+	ctx.JSON(res, nil)
 }
 
 func SetEmail(ctx *bm.Context) {
 	type Request struct {
-		Email string
+		Email string `json:"email"`
 	}
 
 	var (
@@ -149,7 +185,7 @@ func SetEmail(ctx *bm.Context) {
 
 func SetPhone(ctx *bm.Context) {
 	type Request struct {
-		Phone string
+		Phone string `json:"phone"`
 	}
 
 	var (
@@ -179,7 +215,7 @@ func SetPhone(ctx *bm.Context) {
 
 func SetPassword(ctx *bm.Context) {
 	type Request struct {
-		Password string
+		Password string `json:"password"`
 	}
 
 	var (
@@ -208,7 +244,7 @@ func SetPassword(ctx *bm.Context) {
 
 func SetSex(ctx *bm.Context) {
 	type Request struct {
-		Sex string
+		Sex string `json:"sex"`
 	}
 
 	var (
@@ -237,7 +273,7 @@ func SetSex(ctx *bm.Context) {
 
 func SetFace(ctx *bm.Context) {
 	type Request struct {
-		Face string
+		Face string `json:"face"`
 	}
 
 	var (

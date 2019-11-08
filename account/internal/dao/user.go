@@ -55,7 +55,7 @@ func (d *dao) GetProfile(ctx context.Context, mid int64) (r *api.Profile, err er
 
 func (d *dao) GetPassword(ctx context.Context, mid int64) (password string, err error) {
 	row := d.db.QueryRow(ctx, fmt.Sprintf(_selPasswordById, d.hit(mid)), mid)
-	if err = row.Scan(password); err != nil {
+	if err = row.Scan(&password); err != nil {
 		if err == sql.ErrNoRows {
 			err = nil
 		} else {

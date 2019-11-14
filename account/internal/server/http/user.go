@@ -58,6 +58,7 @@ func SignUp(ctx *bm.Context) {
 	pass := u.FilterName(ctx, req.Name)
 	if pass == false {
 		ctx.JSON(nil, ecode.RequestErr)
+		return
 	}
 
 	token, err := u.GenerateToken(ctx)
@@ -129,17 +130,24 @@ func SignIn(ctx *bm.Context) {
 		return
 	}
 
-	// Todo delete old token
-	token, err := u.GenerateToken(ctx)
+	token, err := u.GetToken(ctx, mid)
 	if err != nil {
-		ctx.JSON(nil, err)
+		ctx.JSON(nil, ecode.RequestErr)
 		return
 	}
 
-	err = u.SetToken(ctx, token, mid)
-	if err != nil {
-		ctx.JSON(nil, err)
-		return
+	if token == "" {
+		token, err = u.GenerateToken(ctx)
+		if err != nil {
+			ctx.JSON(nil, err)
+			return
+		}
+
+		err = u.SetToken(ctx, token, mid)
+		if err != nil {
+			ctx.JSON(nil, err)
+			return
+		}
 	}
 
 	info, err := u.GetProfile(ctx, mid)

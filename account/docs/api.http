@@ -6,7 +6,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "name": "wcg",
+  "name": "wcg01",
   "password": "wcg123"
 }
 

@@ -150,3 +150,15 @@ func (s *Service) SetToken(ctx context.Context, token string, mid int64) (err er
 		return errors.New("SetToken error")
 	}
 }
+
+// Get token by mid
+func (s *Service) GetToken(ctx context.Context, mid int64) (token string, err error) {
+	GetTokenReq := &authrpc.GetTokenReq{
+		Mid: mid,
+	}
+	GetTokenReply, err := s.acSrv.GetToken(ctx, GetTokenReq)
+	if err != nil {
+		return
+	}
+	return GetTokenReply.Token, nil
+}

@@ -37,7 +37,7 @@ func (s *Service) GetToken(ctx context.Context, mid int64) (token string, err er
 		return
 	}
 
-	if token, err = s.dao.GetTokenByMid(mid); err != nil {
+	if token, err = s.dao.GetTokenByMid(ctx, mid); err != nil {
 		return
 	}
 

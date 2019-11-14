@@ -25,7 +25,16 @@ message SetTokenReply {
     bool success = 1;
 }
 
+message GetTokenReq {
+    int64 mid = 1;
+}
+
+message GetTokenReply {
+    string token = 1;
+}
+
 service Auth {
     rpc Token (TokenReq) returns (TokenReply);
-    rpc SetToken (SetTokenReq) returns(SetTokenReply);
+    rpc SetToken (SetTokenReq) returns (SetTokenReply);
+    rpc GetToken (GetTokenReq) returns (GetTokenReply);
 }

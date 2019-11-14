@@ -188,17 +188,99 @@ func (m *SetTokenReply) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_SetTokenReply proto.InternalMessageInfo
 
+type GetTokenReq struct {
+	Mid                  int64    `protobuf:"varint,1,opt,name=mid,proto3" json:"mid,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GetTokenReq) Reset()         { *m = GetTokenReq{} }
+func (m *GetTokenReq) String() string { return proto.CompactTextString(m) }
+func (*GetTokenReq) ProtoMessage()    {}
+func (*GetTokenReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_00212fb1f9d3bf1c, []int{4}
+}
+func (m *GetTokenReq) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *GetTokenReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_GetTokenReq.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *GetTokenReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetTokenReq.Merge(m, src)
+}
+func (m *GetTokenReq) XXX_Size() int {
+	return m.Size()
+}
+func (m *GetTokenReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetTokenReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetTokenReq proto.InternalMessageInfo
+
+type GetTokenReply struct {
+	Token                string   `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GetTokenReply) Reset()         { *m = GetTokenReply{} }
+func (m *GetTokenReply) String() string { return proto.CompactTextString(m) }
+func (*GetTokenReply) ProtoMessage()    {}
+func (*GetTokenReply) Descriptor() ([]byte, []int) {
+	return fileDescriptor_00212fb1f9d3bf1c, []int{5}
+}
+func (m *GetTokenReply) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *GetTokenReply) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_GetTokenReply.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *GetTokenReply) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetTokenReply.Merge(m, src)
+}
+func (m *GetTokenReply) XXX_Size() int {
+	return m.Size()
+}
+func (m *GetTokenReply) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetTokenReply.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetTokenReply proto.InternalMessageInfo
+
 func init() {
 	proto.RegisterType((*TokenReq)(nil), "auth.service.TokenReq")
 	proto.RegisterType((*TokenReply)(nil), "auth.service.TokenReply")
 	proto.RegisterType((*SetTokenReq)(nil), "auth.service.SetTokenReq")
 	proto.RegisterType((*SetTokenReply)(nil), "auth.service.SetTokenReply")
+	proto.RegisterType((*GetTokenReq)(nil), "auth.service.GetTokenReq")
+	proto.RegisterType((*GetTokenReply)(nil), "auth.service.GetTokenReply")
 }
 
 func init() { proto.RegisterFile("api.proto", fileDescriptor_00212fb1f9d3bf1c) }
 
 var fileDescriptor_00212fb1f9d3bf1c = []byte{
-	// 248 bytes of a gzipped FileDescriptorProto
+	// 275 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x4c, 0x2c, 0xc8, 0xd4,
 	0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x49, 0x2c, 0x2d, 0xc9, 0xd0, 0x2b, 0x4e, 0x2d, 0x2a,
 	0xcb, 0x4c, 0x4e, 0x95, 0xd2, 0x4d, 0xcf, 0x2c, 0xc9, 0x28, 0x4d, 0xd2, 0x4b, 0xce, 0xcf, 0xd5,
@@ -208,13 +290,15 @@ var fileDescriptor_00212fb1f9d3bf1c = []byte{
 	0xb8, 0xa0, 0x2a, 0x0a, 0x72, 0x2a, 0x85, 0x04, 0xb8, 0x98, 0x73, 0x33, 0x53, 0xc0, 0x2a, 0x98,
 	0x83, 0x40, 0x4c, 0x25, 0x53, 0x2e, 0xee, 0xe0, 0xd4, 0x12, 0xfc, 0x86, 0xc0, 0xb4, 0x31, 0x21,
 	0xb4, 0x69, 0x72, 0xf1, 0x22, 0xb4, 0x81, 0x4c, 0x96, 0xe0, 0x62, 0x2f, 0x2e, 0x4d, 0x4e, 0x4e,
-	0x2d, 0x2e, 0x06, 0x6b, 0xe5, 0x08, 0x82, 0x71, 0x8d, 0x5a, 0x19, 0xb9, 0x58, 0x1c, 0x4b, 0x4b,
-	0x32, 0x84, 0x2c, 0xb9, 0x58, 0xc1, 0x1a, 0x84, 0xc4, 0xf4, 0x90, 0xfd, 0xac, 0x07, 0xb3, 0x5c,
-	0x4a, 0x02, 0xab, 0x38, 0xc8, 0x74, 0x27, 0x2e, 0x0e, 0x98, 0x75, 0x42, 0x92, 0xa8, 0xaa, 0x90,
-	0x5c, 0x2f, 0x25, 0x8d, 0x4b, 0xaa, 0x20, 0xa7, 0xd2, 0x49, 0xf2, 0xc4, 0x43, 0x39, 0x86, 0x13,
-	0x8f, 0xe4, 0x18, 0x2f, 0x3c, 0x92, 0x63, 0x7c, 0xf0, 0x48, 0x8e, 0x71, 0xc6, 0x63, 0x39, 0x86,
-	0x28, 0xe6, 0xc4, 0x82, 0xcc, 0x24, 0x36, 0x70, 0x68, 0x1a, 0x03, 0x02, 0x00, 0x00, 0xff, 0xff,
-	0x4f, 0x79, 0x9a, 0x75, 0x97, 0x01, 0x00, 0x00,
+	0x2d, 0x2e, 0x06, 0x6b, 0xe5, 0x08, 0x82, 0x71, 0x95, 0xe4, 0xb9, 0xb8, 0xdd, 0x91, 0x6c, 0xc0,
+	0x74, 0x82, 0x2a, 0x17, 0xaf, 0x3b, 0x8a, 0x59, 0x58, 0x1d, 0x61, 0x74, 0x92, 0x91, 0x8b, 0xc5,
+	0xb1, 0xb4, 0x24, 0x43, 0xc8, 0x92, 0x8b, 0x15, 0xac, 0x58, 0x48, 0x4c, 0x0f, 0x39, 0xec, 0xf4,
+	0x60, 0x56, 0x48, 0x49, 0x60, 0x15, 0x07, 0x99, 0xec, 0xc4, 0xc5, 0x01, 0x73, 0xb6, 0x90, 0x24,
+	0xaa, 0x2a, 0xa4, 0x50, 0x90, 0x92, 0xc6, 0x25, 0x05, 0x35, 0xc3, 0x1d, 0x87, 0x19, 0xee, 0xb8,
+	0xcd, 0x40, 0xf1, 0xa1, 0x93, 0xe4, 0x89, 0x87, 0x72, 0x0c, 0x27, 0x1e, 0xc9, 0x31, 0x5e, 0x78,
+	0x24, 0xc7, 0xf8, 0xe0, 0x91, 0x1c, 0xe3, 0x8c, 0xc7, 0x72, 0x0c, 0x51, 0xcc, 0x89, 0x05, 0x99,
+	0x49, 0x6c, 0xe0, 0x98, 0x35, 0x06, 0x04, 0x00, 0x00, 0xff, 0xff, 0x38, 0x75, 0x48, 0xad, 0x23,
+	0x02, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -231,6 +315,7 @@ const _ = grpc.SupportPackageIsVersion4
 type AuthClient interface {
 	Token(ctx context.Context, in *TokenReq, opts ...grpc.CallOption) (*TokenReply, error)
 	SetToken(ctx context.Context, in *SetTokenReq, opts ...grpc.CallOption) (*SetTokenReply, error)
+	GetToken(ctx context.Context, in *GetTokenReq, opts ...grpc.CallOption) (*GetTokenReply, error)
 }
 
 type authClient struct {
@@ -259,10 +344,20 @@ func (c *authClient) SetToken(ctx context.Context, in *SetTokenReq, opts ...grpc
 	return out, nil
 }
 
+func (c *authClient) GetToken(ctx context.Context, in *GetTokenReq, opts ...grpc.CallOption) (*GetTokenReply, error) {
+	out := new(GetTokenReply)
+	err := c.cc.Invoke(ctx, "/auth.service.Auth/GetToken", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AuthServer is the server API for Auth service.
 type AuthServer interface {
 	Token(context.Context, *TokenReq) (*TokenReply, error)
 	SetToken(context.Context, *SetTokenReq) (*SetTokenReply, error)
+	GetToken(context.Context, *GetTokenReq) (*GetTokenReply, error)
 }
 
 // UnimplementedAuthServer can be embedded to have forward compatible implementations.
@@ -274,6 +369,9 @@ func (*UnimplementedAuthServer) Token(ctx context.Context, req *TokenReq) (*Toke
 }
 func (*UnimplementedAuthServer) SetToken(ctx context.Context, req *SetTokenReq) (*SetTokenReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetToken not implemented")
+}
+func (*UnimplementedAuthServer) GetToken(ctx context.Context, req *GetTokenReq) (*GetTokenReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetToken not implemented")
 }
 
 func RegisterAuthServer(s *grpc.Server, srv AuthServer) {
@@ -316,6 +414,24 @@ func _Auth_SetToken_Handler(srv interface{}, ctx context.Context, dec func(inter
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Auth_GetToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTokenReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServer).GetToken(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/auth.service.Auth/GetToken",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServer).GetToken(ctx, req.(*GetTokenReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Auth_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "auth.service.Auth",
 	HandlerType: (*AuthServer)(nil),
@@ -327,6 +443,10 @@ var _Auth_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SetToken",
 			Handler:    _Auth_SetToken_Handler,
+		},
+		{
+			MethodName: "GetToken",
+			Handler:    _Auth_GetToken_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -475,6 +595,72 @@ func (m *SetTokenReply) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *GetTokenReq) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *GetTokenReq) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *GetTokenReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	if m.Mid != 0 {
+		i = encodeVarintApi(dAtA, i, uint64(m.Mid))
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *GetTokenReply) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *GetTokenReply) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *GetTokenReply) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	if len(m.Token) > 0 {
+		i -= len(m.Token)
+		copy(dAtA[i:], m.Token)
+		i = encodeVarintApi(dAtA, i, uint64(len(m.Token)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintApi(dAtA []byte, offset int, v uint64) int {
 	offset -= sovApi(v)
 	base := offset
@@ -544,6 +730,37 @@ func (m *SetTokenReply) Size() (n int) {
 	_ = l
 	if m.Success {
 		n += 2
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *GetTokenReq) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Mid != 0 {
+		n += 1 + sovApi(uint64(m.Mid))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *GetTokenReply) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Token)
+	if l > 0 {
+		n += 1 + l + sovApi(uint64(l))
 	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
@@ -870,6 +1087,165 @@ func (m *SetTokenReply) Unmarshal(dAtA []byte) error {
 				}
 			}
 			m.Success = bool(v != 0)
+		default:
+			iNdEx = preIndex
+			skippy, err := skipApi(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthApi
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthApi
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *GetTokenReq) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowApi
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: GetTokenReq: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: GetTokenReq: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Mid", wireType)
+			}
+			m.Mid = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowApi
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Mid |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipApi(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthApi
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthApi
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *GetTokenReply) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowApi
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: GetTokenReply: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: GetTokenReply: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Token", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowApi
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthApi
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthApi
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Token = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipApi(dAtA[iNdEx:])

@@ -16,6 +16,41 @@
         "application/json"
     ],
     "paths": {
+        "/auth.service.Auth/GetToken": {
+            "get": {
+                "summary": "/auth.service.Auth/GetToken",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.auth.service.GetTokenReply"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "mid",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "auth.service.Auth"
+                ]
+            }
+        },
         "/auth.service.Auth/SetToken": {
             "get": {
                 "summary": "/auth.service.Auth/SetToken",
@@ -94,6 +129,22 @@
         }
     },
     "definitions": {
+        ".auth.service.GetTokenReply": {
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string"
+                }
+            }
+        },
+        ".auth.service.GetTokenReq": {
+            "type": "object",
+            "properties": {
+                "mid": {
+                    "type": "integer"
+                }
+            }
+        },
         ".auth.service.SetTokenReply": {
             "type": "object",
             "properties": {

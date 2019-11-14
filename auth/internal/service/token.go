@@ -31,3 +31,15 @@ func (s *Service) SetToken(ctx context.Context, token string, mid int64) (err er
 
 	return
 }
+
+func (s *Service) GetToken(ctx context.Context, mid int64) (token string, err error) {
+	if mid == 0 {
+		return
+	}
+
+	if token, err = s.dao.GetTokenByMid(mid); err != nil {
+		return
+	}
+
+	return
+}

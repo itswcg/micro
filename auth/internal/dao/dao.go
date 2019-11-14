@@ -17,6 +17,7 @@ type Dao interface {
 	Ping(ctx context.Context) (err error)
 	SetToken(ctx context.Context, token string, mid int64) (err error)
 	GetMidByToken(ctx context.Context, token string) (mid int64, err error)
+	GetTokenByMid(ctx context.Context, mid int64) (token string, err error)
 }
 
 // dao dao.
